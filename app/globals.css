@@ -4,8 +4,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-background: var(--background);
+  --color-background: var(--bg-workspace);
   --color-foreground: var(--foreground);
+  --color-lp-background: var(--lp-bg);
   --font-sans: var(--font-body);
   --font-mono: var(--font-header);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -49,6 +50,7 @@
 }
 
 :root {
+
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -62,10 +64,10 @@
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
+  --accent: oklch(0.556 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
+  --border: var(--gray-100);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
   --chart-1: oklch(0.646 0.222 41.116);
@@ -119,6 +121,13 @@
 
   /* Semantics */
   --billow-primary-text: var(--gray-900);
+  --bg-workspace: var(--black);
+  --workspace-text-Primary: var(--gray-50);
+  --lp-bg: var(--gray-50);
+  --gradient-billow-sidebar: linear-gradient(180deg, var(--black) 70%, var(--brand-blue-700) 100%);
+
+  /* layout */
+  --header-h: 64px;
 }
 
 .dark {
@@ -162,10 +171,11 @@
     @apply border-border outline-ring/50;
   }
 
-  body {
+  /* body {
     @apply bg-background text-foreground;
     font-family: var(--font-body), system-ui, sans-serif;
-  }
+  } */
+
 
   h1,
   h2,
@@ -175,4 +185,19 @@
   h6 {
     font-family: var(--font-header), system-ui, sans-serif;
   }
+}
+
+@layer utilities {
+  .bg-billow-sidebar-gradient {
+    background: var(--gradient-billow-sidebar);
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--lp-bg);
 }
