@@ -50,24 +50,24 @@ export function AppSidebar() {
                     <SidebarGroupContent>
                         <SidebarMenu>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild className="w-auto  active:bg-transparent data-[active=true]:bg-transparent data-[active=true]:text-primary" isActive={pathname === "/app/w/chat"}
+                                <SidebarMenuButton asChild className="w-auto  active:bg-transparent data-[active=true]:bg-transparent data-[active=true]:text-primary" isActive={pathname === "/app/chat"}
                                 >
-                                    <Link href="/app/w/chat" className="text-gray-400 hover:text-white hover:bg-transparent" ><MessageSquare /><span>Chat</span></Link>
+                                    <Link href="/app/chat" className="text-gray-400 hover:text-white hover:bg-transparent" ><MessageSquare /><span>Chat</span></Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild className=" w-auto active:bg-transparent  data-[active=true]:bg-transparent data-[active=true]:text-primary" isActive={pathname === "/app/w/subscriptions"}>
-                                    <Link href="/app/w/subscriptions" className="text-gray-400 hover:text-white hover:bg-transparent"><CreditCard /><span>Subscriptions</span></Link>
+                                <SidebarMenuButton asChild className=" w-auto active:bg-transparent  data-[active=true]:bg-transparent data-[active=true]:text-primary" isActive={pathname === "/app/subscriptions"}>
+                                    <Link href="/app/subscriptions" className="text-gray-400 hover:text-white hover:bg-transparent"><CreditCard /><span>Subscriptions</span></Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild className=" w-auto  active:bg-transparent data-[active=true]:bg-transparent data-[active=true]:text-primary" isActive={pathname === "/app/w/members"}>
-                                    <Link href="/app/w/members" className="text-gray-400 hover:text-white hover:bg-transparent"><Users /><span>Members</span></Link>
+                                <SidebarMenuButton asChild className=" w-auto  active:bg-transparent data-[active=true]:bg-transparent data-[active=true]:text-primary" isActive={pathname === "/app/members"}>
+                                    <Link href="/app/members" className="text-gray-400 hover:text-white hover:bg-transparent"><Users /><span>Members</span></Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild className=" w-auto active:bg-transparent data-[active=true]:bg-transparent data-[active=true]:text-primary" isActive={pathname === "/app/w/settings"}>
-                                    <Link href="/app/w/settings" className="text-gray-400 hover:text-white hover:bg-transparent"><Settings /><span>Setting</span></Link>
+                                <SidebarMenuButton asChild className=" w-auto active:bg-transparent data-[active=true]:bg-transparent data-[active=true]:text-primary" isActive={pathname === "/app/settings"}>
+                                    <Link href="/app/settings" className="text-gray-400 hover:text-white hover:bg-transparent"><Settings /><span>Setting</span></Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                         </SidebarMenu>

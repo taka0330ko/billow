@@ -30,7 +30,7 @@ export default function ChatStartPage() {
 
 
     return (
-        <div className='flex flex-col justify-center items-center h-svh'>
+        <div className='flex flex-col mt-24 items-center h-svh'>
             <div className="flex p-6 items-end justify-between w-full max-w-160">
                 <h1 className="text-gray-300 text-4xl">Hi, Alex</h1>
                 <p className="text-gray-300">Burst creative group</p>
