@@ -35,16 +35,16 @@ export default function ChatStartPage() {
                 <h1 className="text-gray-300 text-4xl">Hi, Alex</h1>
                 <p className="text-gray-300">Burst creative group</p>
             </div>
-            <Card className="w-full max-w-160 mx-auto bg-gray-700/50 border-1 border-gray-500">
+            <Card className="w-full max-w-160 mx-auto bg-gray-700/50 border border-gray-500">
                 <CardHeader className="w-full">
                     <CardTitle><p className="text-lg font-light text-gray-400">Quick Action</p></CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className="flex justify-evenly gap-2 w-full">
-                        <Button className="bg-gray-700/50 border-1 border-gray-500 flex flex-col h-auto py-8"><CircleCheck />Monthly spend</Button>
-                        <Button className="bg-gray-700/50 border-1 border-gray-500 flex flex-col h-auto"><Users />Add new member</Button>
-                        <Button className="bg-gray-700/50 border-1 border-gray-500 flex flex-col h-auto"><CreditCard />My subscription</Button>
-                        <Button className="bg-gray-700/50 border-1 border-gray-500 flex flex-col h-auto"><FileText />Generate report</Button>
+                        <Button className="bg-gray-700/50 border border-gray-500 flex flex-col h-auto py-8"><CircleCheck />Monthly spend</Button>
+                        <Button className="bg-gray-700/50 border border-gray-500 flex flex-col h-auto"><Users />Add new member</Button>
+                        <Button className="bg-gray-700/50 border border-gray-500 flex flex-col h-auto"><CreditCard />My subscription</Button>
+                        <Button className="bg-gray-700/50 border border-gray-500 flex flex-col h-auto"><FileText />Generate report</Button>
                     </div>
                     <div className="mt-6">
                         <div className="relative w-full">
