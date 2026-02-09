@@ -29,16 +29,17 @@ export function AppSidebar() {
     const pathname = usePathname()
 
     return (
+    //Forcibly adjust the sidebar height slightly
         <Sidebar
-            className="
-    !top-[var(--header-h)]
-    !h-[calc(100svh-var(--header-h))]
-  "
+        className="
+        top-(--header-h)!
+        h-[calc(100svh-var(--header-h))]!
+        "
             collapsible="icon">
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton asChild className="w-auto active:bg-transparent">
+                        <SidebarMenuButton asChild className="active:bg-transparent">
                             <div className="text-gray-400 hover:text-white hover:bg-transparent"><Search /><span>Search</span></div>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -50,24 +51,24 @@ export function AppSidebar() {
                     <SidebarGroupContent>
                         <SidebarMenu>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild className="w-auto  active:bg-transparent data-[active=true]:bg-transparent data-[active=true]:text-primary" isActive={pathname === "/app/chat"}
+                                <SidebarMenuButton asChild variant="billowSidebarBtn" isActive={pathname === "/app/chat"}
                                 >
-                                    <Link href="/app/chat" className="text-gray-400 hover:text-white hover:bg-transparent" ><MessageSquare /><span>Chat</span></Link>
+                                    <Link href="/app/chat" ><MessageSquare /><span>Chat</span></Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild className=" w-auto active:bg-transparent  data-[active=true]:bg-transparent data-[active=true]:text-primary" isActive={pathname === "/app/subscriptions"}>
-                                    <Link href="/app/subscriptions" className="text-gray-400 hover:text-white hover:bg-transparent"><CreditCard /><span>Subscriptions</span></Link>
+                                <SidebarMenuButton asChild variant="billowSidebarBtn" isActive={pathname === "/app/subscriptions"}>
+                                    <Link href="/app/subscriptions"><CreditCard /><span>Subscriptions</span></Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild className=" w-auto  active:bg-transparent data-[active=true]:bg-transparent data-[active=true]:text-primary" isActive={pathname === "/app/members"}>
-                                    <Link href="/app/members" className="text-gray-400 hover:text-white hover:bg-transparent"><Users /><span>Members</span></Link>
+                                <SidebarMenuButton asChild variant="billowSidebarBtn" isActive={pathname === "/app/members"}>
+                                    <Link href="/app/members" ><Users /><span>Members</span></Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild className=" w-auto active:bg-transparent data-[active=true]:bg-transparent data-[active=true]:text-primary" isActive={pathname === "/app/settings"}>
-                                    <Link href="/app/settings" className="text-gray-400 hover:text-white hover:bg-transparent"><Settings /><span>Setting</span></Link>
+                                <SidebarMenuButton asChild variant="billowSidebarBtn" isActive={pathname === "/app/settings"}>
+                                    <Link href="/app/settings"><Settings /><span>Setting</span></Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                         </SidebarMenu>

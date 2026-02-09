@@ -17,7 +17,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet"
-import { Skeleton } from "@/components/ui/skeleton"
+// import { Skeleton } from "@/components/ui/skeleton"
 import {
   Tooltip,
   TooltipContent,
@@ -187,7 +187,7 @@ function Sidebar({
           data-sidebar="sidebar"
           data-slot="sidebar"
           data-mobile="true"
-          className="bg-billow-sidebar-gradient text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden !top-[var(--header-h)] !h-[calc(100svh-var(--header-h))]"
+          className="bg-billow-sidebar-gradient text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden top-(--header-h)! h-[calc(100svh-var(--header-h))]!"
           style={
             {
               "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
@@ -291,7 +291,7 @@ function SidebarRail({ className, ...props }: React.ComponentProps<"button">) {
       onClick={toggleSidebar}
       title="Toggle Sidebar"
       className={cn(
-        "hover:after:bg-sidebar-border absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:absolute after:inset-y-0 after:left-1/2 after:w-[2px] sm:flex",
+        "hover:after:bg-sidebar-border absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:absolute after:inset-y-0 after:left-1/2 after:w-0.5 sm:flex",
         "in-data-[side=left]:cursor-w-resize in-data-[side=right]:cursor-e-resize",
         "[[data-side=left][data-state=collapsed]_&]:cursor-e-resize [[data-side=right][data-state=collapsed]_&]:cursor-w-resize",
         "hover:group-data-[collapsible=offcanvas]:bg-sidebar group-data-[collapsible=offcanvas]:translate-x-0 group-data-[collapsible=offcanvas]:after:left-full",
@@ -481,6 +481,7 @@ const sidebarMenuButtonVariants = cva(
         default: "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
         outline:
           "bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))]",
+        billowSidebarBtn:"active:bg-transparent  data-[active=true]:bg-transparent data-[active=true]:text-primary text-secondary-foreground hover:text-foreground hover:bg-transparent",
       },
       size: {
         default: "h-8 text-sm",
@@ -599,43 +600,42 @@ function SidebarMenuBadge({
   )
 }
 
-function SidebarMenuSkeleton({
-  className,
-  showIcon = false,
-  ...props
-}: React.ComponentProps<"div"> & {
-  showIcon?: boolean
-}) {
-  // Random width between 50 to 90%.
-  const width = React.useMemo(() => {
-    return `${Math.floor(Math.random() * 40) + 50}%`
-  }, [])
+// function SidebarMenuSkeleton({
+//   className,
+//   showIcon = false,
+//   ...props
+// }: React.ComponentProps<"div"> & {
+//   showIcon?: boolean
+// }) {
+//   const width = React.useMemo(() => {
+//     return `${Math.floor(Math.random() * 40) + 50}%`
+//   }, [])
 
-  return (
-    <div
-      data-slot="sidebar-menu-skeleton"
-      data-sidebar="menu-skeleton"
-      className={cn("flex h-8 items-center gap-2 rounded-md px-2", className)}
-      {...props}
-    >
-      {showIcon && (
-        <Skeleton
-          className="size-4 rounded-md"
-          data-sidebar="menu-skeleton-icon"
-        />
-      )}
-      <Skeleton
-        className="h-4 max-w-(--skeleton-width) flex-1"
-        data-sidebar="menu-skeleton-text"
-        style={
-          {
-            "--skeleton-width": width,
-          } as React.CSSProperties
-        }
-      />
-    </div>
-  )
-}
+//   return (
+//     <div
+//       data-slot="sidebar-menu-skeleton"
+//       data-sidebar="menu-skeleton"
+//       className={cn("flex h-8 items-center gap-2 rounded-md px-2", className)}
+//       {...props}
+//     >
+//       {showIcon && (
+//         <Skeleton
+//           className="size-4 rounded-md"
+//           data-sidebar="menu-skeleton-icon"
+//         />
+//       )}
+//       <Skeleton
+//         className="h-4 max-w-(--skeleton-width) flex-1"
+//         data-sidebar="menu-skeleton-text"
+//         style={
+//           {
+//             "--skeleton-width": width,
+//           } as React.CSSProperties
+//         }
+//       />
+//     </div>
+//   )
+// }
 
 function SidebarMenuSub({ className, ...props }: React.ComponentProps<"ul">) {
   return (
@@ -714,7 +714,7 @@ export {
   SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSkeleton,
+  // SidebarMenuSkeleton,
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
