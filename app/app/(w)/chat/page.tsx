@@ -1,4 +1,5 @@
 "use client"
+import {useRouter} from "next/navigation"
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -18,18 +19,14 @@ import {
 } from "lucide-react"
 
 
-// import { useRouter } from 'next/router'
-// import React, { useState } from 'react'
-
-// function createThreadId() {
-//     crypto.randomUUID()
-// }
 export default function ChatStartPage() {
-    // const router = useRouter();
-    // const [text, setText] = useState("");
 
+
+    const router = useRouter();
+    const roomId = crypto.randomUUID()
 
     return (
+
         <div className='flex flex-col mt-24 items-center h-svh'>
             <div className="flex p-6 items-end justify-between w-full max-w-160">
                 <h1 className="text-gray-300 text-4xl">Hi, Alex</h1>
@@ -41,10 +38,15 @@ export default function ChatStartPage() {
                 </CardHeader>
                 <CardContent>
                     <div className="flex justify-evenly gap-2 w-full">
-                        <Button variant="quickActionBtn" className="py-14"><CircleCheck />Monthly spend</Button>
-                        <Button variant="quickActionBtn" className="py-14"><Users />Add new member</Button>
-                        <Button variant="quickActionBtn" className="py-14"><CreditCard />My subscription</Button>
-                        <Button variant="quickActionBtn" className="py-14"><FileText />Generate report</Button>
+                        <Button onClick={()=> 
+                            router.push(`/app/chat/${roomId}`)} variant="quickActionBtn" className="py-14 "><CircleCheck />Monthly spend</Button>
+                        <Button onClick={()=> {
+                        const title = "Add member"
+                            router.push(`/app/chat/${roomId}?title=${encodeURIComponent(title)}`)}} variant="quickActionBtn" className="py-14"><Users />Add new member</Button>
+                        <Button onClick={()=> 
+                            router.push(`/app/chat/${roomId}`)} variant="quickActionBtn" className="py-14"><CreditCard />My subscription</Button>
+                        <Button onClick={()=> 
+                            router.push(`/app/chat/${roomId}`)} variant="quickActionBtn" className="py-14"><FileText />Generate report</Button>
                     </div>
                     <div className="mt-6">
                         <div className="relative w-full">
