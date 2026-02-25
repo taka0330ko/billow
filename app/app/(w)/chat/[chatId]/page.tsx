@@ -1,19 +1,27 @@
-import React from 'react'
+"use client"
+import { useParams } from "next/navigation"
+import { useChatStore } from "@/app/store/chatStore"
 
-type Props ={
-    params:{
-        chatId: string
-    }
-    searchParams: { title?: string }
-}
+export default function ChatRoomPage() {
+  const params = useParams()
+  const chatId = params.chatId as string
 
-export default function ChatRoomPage({params, searchParams}: Props) {
-    const title = searchParams.title ?? "New Chat"
-    const { chatId } = params
+  const room = useChatStore((state)=>
+  state.rooms[chatId])
+
+  if (!room) {
+    return <div className="p-10 text-white">Room not found</div>
+  }
+
   return (
-    <div className='text-white'>
-      <h1>{title}</h1>
-      <p>RoomId:{chatId}</p>
+    <div className="p-10 text-white">
+      <h1 className="text-2xl mb-4">{room.title}</h1>
+
+      {room.messages.map((msg) => (
+        <div key={msg.id} className="mb-2">
+          <strong>{msg.role}:</strong> {msg.content}
+        </div>
+      ))}
     </div>
   )
 }

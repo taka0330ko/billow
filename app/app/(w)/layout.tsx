@@ -2,6 +2,7 @@ import { AppSidebar } from "@/components/ui/app-sidebar";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import Header from "@/components/header";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import Script from "next/script";
 
 
 export default function WorkSpaceLayout({ children }: { children: React.ReactNode }) {
@@ -21,6 +22,10 @@ export default function WorkSpaceLayout({ children }: { children: React.ReactNod
                     </SidebarInset>
                 </div>
             </div>
+            <Script
+              src="https://js.puter.com/v2/"
+              strategy="afterInteractive"
+            />
         </SidebarProvider>
     );
 }
