@@ -2,11 +2,38 @@
 import { useParams } from "next/navigation"
 import { useChatStore } from "@/app/store/chatStore"
 import { Input } from "@/components/ui/input"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+
+//何が返ってきても、とにかく最終的に string にして返す安全フィルター
+function extractAiText(res: unknown): string {
+  if (typeof res === "string") return res
+
+  if (
+    typeof res === "object" &&
+    res !== null &&
+    "message" in res
+  ) {
+    const message = (res as { message?: unknown }).message
+
+    if (
+      typeof message === "object" &&
+      message !== null &&
+      "content" in message
+    ) {
+      const content = (message as { content?: unknown }).content
+      if (typeof content === "string") {
+        return content
+      }
+    }
+  }
+
+  return ""
+}
 
 export default function ChatRoomPage() {
   const [inputValue, setInputValue] = useState("");
-  const addMessage = useChatStore((state)=> state.addMessage)
+  const addMessage = useChatStore((state)=> state.addMessage);
+  const refFirstRef = useRef<boolean>(true);
 
   const params = useParams()
   const chatId = params.chatId as string
@@ -26,18 +53,56 @@ export default function ChatRoomPage() {
   const room = useChatStore((state)=>
   state.rooms[chatId])
 
+
+useEffect(()=>{
+  if (!room) return; 
+  if(room.messages.length > 1) return;
+   
+    if (refFirstRef.current) {
+      refFirstRef.current = false;
+      return;
+    }
+  
+  const initialAiRes = async() =>{
+    
+      const firstMessage = room.messages[0]?.content ?? ""
+
+      const chatUnknown: unknown = window?.puter?.ai?.chat
+      if (typeof chatUnknown !== "function") return
+
+      const chat = chatUnknown as (prompt: string) => Promise<unknown>
+      const res = await chat(firstMessage)
+      const aiText = extractAiText(res)
+    
+    addMessage(chatId, "assistant", aiText)
+  }
+  initialAiRes();
+  },[room, chatId, addMessage])
+
   if (!room) {
     return <div className="p-10 text-white">Room not found</div>
   }
 
-  const handleSubmit = (e:React.SyntheticEvent<HTMLFormElement>) =>{
+  const handleSubmit = async (e:React.SyntheticEvent<HTMLFormElement>) =>{
     e.preventDefault();
 
     const userMessage = inputValue.trim();
     if(!userMessage) return;
     setInputValue("");
-
     addMessage(chatId, "user", userMessage)
+
+    const chatUnknown: unknown = window?.puter?.ai?.chat
+    if (typeof chatUnknown !== "function") {
+      console.warn("[puter] ai.chat not ready")
+      return
+    }
+
+    const chat = chatUnknown as (prompt: string) => Promise<unknown>
+    const res = await chat(userMessage)
+    const aiText = extractAiText(res)
+
+    addMessage(chatId, "assistant", aiText)
+    
   }
   
   
