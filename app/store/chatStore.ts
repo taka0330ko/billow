@@ -21,6 +21,21 @@ type ChatStore = {
     addMessage: (roomId: string, role: "user" | "assistant", content:string) => void
 }
 
+// 「Zustandでストアを作る」
+// 「localStorageに保存する」
+// 「更新関数(set/get)で状態を書き換える」
+
+// persist(
+//   (set, get) => ({ ... }),
+//   { name: "billow-chat-storage" }
+// )
+
+// Record<string, Room>
+// rooms = {
+//   "roomId-1": Room,
+//   "roomId-2": Room,
+// }
+
 export const useChatStore = create<ChatStore>()(
     persist(
         (set, get) => ({
