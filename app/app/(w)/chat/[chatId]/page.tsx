@@ -3,6 +3,8 @@ import { useParams } from "next/navigation"
 import { useChatStore } from "@/app/store/chatStore"
 import { Input } from "@/components/ui/input"
 import { useEffect, useRef, useState } from "react"
+import ScrollableChat from "@/components/ScrollableChat"
+import ChatRoomInput from "@/components/ui/ChatRoomInput"
 
 //何が返ってきても、とにかく最終的に string にして返す安全フィルター
 function extractAiText(res: unknown): string {
@@ -105,29 +107,14 @@ useEffect(()=>{
     
   }
   
-  console.log(room.messages);
-  
   
 
   return (
     <div className="p-10 text-white h-full w-full">
         <h1 className="text-2xl mb-4">{room.title}</h1>
+        <ScrollableChat messages ={room.messages}/>
       <div className="flex flex-col justify-between h-auto">
-        <div className="text-container h-100">
-          {room.messages.map((msg ,index) => (
-            <div 
-            key={index}
-            className={`flex ${msg.role == "user" ? "justify-end" : "justify-start"}`}>
-              <p key={msg.id} 
-              className={`mb-2 
-              ${msg.role == "user" 
-                ? "bg-white rounded-lg rounded-br-[1px] px-2 py-1 text-gray-900" 
-              : ""}`}>
-                 {msg.content}
-              </p>
-            </div>
-          ))}
-        </div>
+        <ChatRoomInput/>
         <form onSubmit={handleSubmit}>
           <Input
             id="chat-room-input"
