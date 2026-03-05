@@ -18,7 +18,7 @@ export default function WorkSpaceLayout({ children }: { children: React.ReactNod
           pt-(--header-h)
         ">
                         <SidebarTrigger />
-                        <main>{children}</main>
+                        {children}
                     </SidebarInset>
                 </div>
             </div>

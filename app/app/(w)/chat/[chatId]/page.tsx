@@ -105,17 +105,26 @@ useEffect(()=>{
     
   }
   
+  console.log(room.messages);
+  
   
 
   return (
-    <div className="p-10 text-white">
-      
+    <div className="p-10 text-white h-full w-full">
         <h1 className="text-2xl mb-4">{room.title}</h1>
-        <div className="flex flex-col justify-between">
+      <div className="flex flex-col justify-between h-auto">
         <div className="text-container h-100">
-          {room.messages.map((msg) => (
-            <div key={msg.id} className="mb-2">
-              <strong>{msg.role}:</strong> {msg.content}
+          {room.messages.map((msg ,index) => (
+            <div 
+            key={index}
+            className={`flex ${msg.role == "user" ? "justify-end" : "justify-start"}`}>
+              <p key={msg.id} 
+              className={`mb-2 
+              ${msg.role == "user" 
+                ? "bg-white rounded-lg rounded-br-[1px] px-2 py-1 text-gray-900" 
+              : ""}`}>
+                 {msg.content}
+              </p>
             </div>
           ))}
         </div>
@@ -123,7 +132,7 @@ useEffect(()=>{
           <Input
             id="chat-room-input"
             placeholder="Ask billow anything..."
-            className="h-14 w-full rounded-full  bg-gray-200/90 pl-6 pr-16 text-secondary placeholder:text-placeholder focus-visible:ring-0 focus-visible:border-transparent"
+            className="h-14 mb-8 w-full rounded-full  bg-gray-200/90 pl-6 pr-16 text-secondary placeholder:text-placeholder focus-visible:ring-0 focus-visible:border-transparent"
             value={inputValue}
             onChange={(e)=>setInputValue(e.target.value)}
           />
