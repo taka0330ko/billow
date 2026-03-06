@@ -39,7 +39,6 @@ export default function ChatStartPage() {
 
         router.push(`/app/chat/${roomId}`)
         setInputValue("");
-        console.log(inputValue);
     }
 
     return (

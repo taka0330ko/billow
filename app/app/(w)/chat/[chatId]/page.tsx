@@ -1,8 +1,7 @@
 "use client"
 import { useParams } from "next/navigation"
 import { useChatStore } from "@/app/store/chatStore"
-import { Input } from "@/components/ui/input"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import ScrollableChat from "@/components/ScrollableChat"
 import ChatRoomInput from "@/components/ui/ChatRoomInput"
 
@@ -33,29 +32,43 @@ function extractAiText(res: unknown): string {
 }
 
 export default function ChatRoomPage() {
-  const [inputValue, setInputValue] = useState("");
   const addMessage = useChatStore((state)=> state.addMessage);
   const refFirstRef = useRef<boolean>(true);
 
   const params = useParams()
   const chatId = params.chatId as string
 
+  //aiが準備完了か確認する関数をuseEffect内に書く。[]で最初だけ。
   useEffect(() => {
     const interval = window.setInterval(() => {
       const chatFn = window?.puter?.ai?.chat
       if (typeof chatFn !== "function") return
-
-      console.log("[puter] ai.chat ready")
       window.clearInterval(interval)
     }, 300)
 
     return () => window.clearInterval(interval)
   }, [])
 
+// Zustand のストアから「特定のチャットルーム」を取り出している
+// ex) rooms = {
+//   "abc123": {
+//     title: "My chat",
+//     messages: [...]
+//   },
+//   "xyz999": {
+//     title: "Another chat",
+//     messages: [...]
+//   }
+// }
+
+//　=> room.title や　room.messages が使える
   const room = useChatStore((state)=>
   state.rooms[chatId])
 
 
+//strict modeで2回レンダーされるのでuseRefでガード
+//useRef は 再レンダーしても値が保持される変数
+// NOTE:useRef 依存の設計なので改善すべき
 useEffect(()=>{
   if (!room) return; 
   if(room.messages.length > 1) return;
@@ -65,6 +78,7 @@ useEffect(()=>{
       return;
     }
   
+//最初のAIからのレスポンス。最初のチャットページのメッセージ（一番目）を取得
   const initialAiRes = async() =>{
     
       const firstMessage = room.messages[0]?.content ?? ""
@@ -85,46 +99,39 @@ useEffect(()=>{
     return <div className="p-10 text-white">Room not found</div>
   }
 
-  const handleSubmit = async (e:React.SyntheticEvent<HTMLFormElement>) =>{
-    e.preventDefault();
+  const handleSubmit = async (message: string) =>{
+    addMessage(chatId, "user", message)
 
-    const userMessage = inputValue.trim();
-    if(!userMessage) return;
-    setInputValue("");
-    addMessage(chatId, "user", userMessage)
 
+    //AIのレスポンスをunknown に落とす
     const chatUnknown: unknown = window?.puter?.ai?.chat
     if (typeof chatUnknown !== "function") {
       console.warn("[puter] ai.chat not ready")
       return
     }
-
     const chat = chatUnknown as (prompt: string) => Promise<unknown>
-    const res = await chat(userMessage)
+    
+    const res = await chat(message)
     const aiText = extractAiText(res)
 
     addMessage(chatId, "assistant", aiText)
-    
   }
   
   
 
   return (
     <div className="p-10 text-white h-full w-full">
-        <h1 className="text-2xl mb-4">{room.title}</h1>
+      <h1 className="text-2xl mb-4">{room.title}</h1>
+
         <ScrollableChat messages ={room.messages}/>
-      <div className="flex flex-col justify-between h-auto">
-        <ChatRoomInput/>
-        <form onSubmit={handleSubmit}>
-          <Input
-            id="chat-room-input"
-            placeholder="Ask billow anything..."
-            className="h-14 mb-8 w-full rounded-full  bg-gray-200/90 pl-6 pr-16 text-secondary placeholder:text-placeholder focus-visible:ring-0 focus-visible:border-transparent"
-            value={inputValue}
-            onChange={(e)=>setInputValue(e.target.value)}
+
+        <div className="flex flex-col justify-between h-auto">
+      
+          <ChatRoomInput 
+          handleSubmit={handleSubmit}
           />
-        </form>
-      </div>
+
+        </div>
     </div>
   )
 }

@@ -1,8 +1,24 @@
+import { useState } from "react";
 import { Input } from "./input"
 
-function ChatRoomInput() {
+type ChatRoomInputPros = {
+  handleSubmit:(message: string) => void;
+}
+
+function ChatRoomInput({handleSubmit}:ChatRoomInputPros) {
+
+  const [inputValue, setInputValue] = useState("");
+
+  const onSubmit = (e: React.SyntheticEvent<HTMLFormElement>) =>{
+    e.preventDefault();
+    const message = inputValue.trim();
+    if(!message) return
+
+    handleSubmit(message)
+    setInputValue("")
+  }
   return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={onSubmit}>
           <Input
             id="chat-room-input"
             placeholder="Ask billow anything..."
@@ -15,3 +31,15 @@ function ChatRoomInput() {
 }
 
 export default ChatRoomInput
+
+// 親コンポーネント
+//    ↓
+// 関数を props として渡す
+//    ↓
+// 子コンポーネント
+//    ↓
+// イベント発生（submit）
+//    ↓
+// props の関数を実行
+//    ↓
+// 親の関数が動く
