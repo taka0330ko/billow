@@ -30,11 +30,13 @@ function ChatRoomInput({handleSubmit}:ChatRoomInputPros) {
               onChange={(e)=>setInputValue(e.target.value)}
             />
             {/* option bar */}
-            <div className="w-full flex-1 flex justify-between bg-card px-6 py-2 rounded-full">
-              <button><Plus/></button>
-              <button>Quick Action</button>
+            <div className="w-full flex-1 flex items-center justify-between bg-card px-6 py-2 rounded-full">
+              <div className="flex gap-4">
+                <button type="button"><Plus/></button>
+                <button type="button">Quick Action</button>
+              </div>
             <p className="text-gray-400">Drag & Drop file here</p>
-            <button><ArrowUp/></button>
+            <button type="submit" className="px-4 py-1 rounded-full cursor-pointer hover:bg-primary"><ArrowUp/></button>
             </div>
           </div>
         </form>
