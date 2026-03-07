@@ -48,7 +48,7 @@
 
   --color-billow-primary-text: var(--billow-primary-text);
   --color-quick-action-btn:(var(--gray-600-030));
-  --color-placeholder:(var(--gray-500)):
+  --color-placeholder:(var(--gray-300)):
 }
 
 :root {
