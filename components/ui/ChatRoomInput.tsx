@@ -18,11 +18,11 @@ function ChatRoomInput({handleSubmit}:ChatRoomInputPros) {
     setInputValue("")
   }
   return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} >
           <Input
             id="chat-room-input"
             placeholder="Ask billow anything..."
-            className="h-14 mb-8 w-full rounded-full  bg-gray-200/90 pl-6 pr-16 text-secondary placeholder:text-placeholder focus-visible:ring-0 focus-visible:border-transparent"
+            className="h-14  w-full rounded-full  bg-gray-200/90 pl-6 pr-16 text-secondary placeholder:text-placeholder focus-visible:ring-0 focus-visible:border-transparent"
             value={inputValue}
             onChange={(e)=>setInputValue(e.target.value)}
           />

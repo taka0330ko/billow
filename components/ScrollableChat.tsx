@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 
 type ChatMessage = {
     id: string;
@@ -9,21 +10,37 @@ type ScrollableChatProps = {
     messages: ChatMessage[]
 }
 function ScrollableChat({messages}:ScrollableChatProps) {
+  const messageEndRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollToBottom = ():void =>{
+    messageEndRef.current?.scrollIntoView({
+      behavior: "smooth"
+    })
+  }
+
+  useEffect(()=>{
+    scrollToBottom();
+  },[messages])
+
+
   return (
-      <div className="text-container h-100">
-          {messages.map((msg ,index) => (
-            <div 
-            key={index}
-            className={`flex ${msg.role == "user" ? "justify-end" : "justify-start"}`}>
-              <p key={msg.id} 
-              className={`mb-2 
-              ${msg.role == "user" 
-                ? "bg-white rounded-lg rounded-br-[1px] px-2 py-1 text-gray-900" 
-              : ""}`}>
-                 {msg.content}
-              </p>
+      <div className="text-container flex-1 overflow-y-auto">
+            <div className="max-h-30">
+              {messages.map((msg) => (
+                <div
+                key={msg.id}
+                className={`flex p-4 ${msg.role == "user" ? "justify-end" : "justify-start"}`}>
+                  <p key={msg.id}
+                  className={`mb-2
+                  ${msg.role == "user"
+                    ? "bg-white rounded-lg rounded-br-[1px] px-2 py-1 text-gray-900"
+                  : "mb-16"}`}>
+                     {msg.content}
+                  </p>
+                </div>
+              ))}
+                        <div ref={messageEndRef}></div>
             </div>
-          ))}
         </div>
   )
 }

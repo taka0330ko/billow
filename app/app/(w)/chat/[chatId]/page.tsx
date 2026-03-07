@@ -120,18 +120,14 @@ useEffect(()=>{
   
 
   return (
-    <div className="p-10 text-white h-full w-full">
+    <div className="flex flex-col p-8 text-white h-full">
       <h1 className="text-2xl mb-4">{room.title}</h1>
 
-        <ScrollableChat messages ={room.messages}/>
-
-        <div className="flex flex-col justify-between h-auto">
-      
-          <ChatRoomInput 
-          handleSubmit={handleSubmit}
-          />
-
+        <div className="flex flex-col min-h-0 flex-1 relative">
+          <ScrollableChat messages ={room.messages}/>
+          <ChatRoomInput handleSubmit={handleSubmit}/>
         </div>
+
     </div>
   )
 }

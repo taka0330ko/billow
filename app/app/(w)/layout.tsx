@@ -19,9 +19,11 @@ export default function WorkSpaceLayout({ children }: { children: React.ReactNod
         ">
                         <SidebarTrigger />
                         {children}
-                    </SidebarInset>
+                        </SidebarInset>
                 </div>
             </div>
+
+        {/* puter.js読み込み */}
             <Script
               src="https://js.puter.com/v2/"
               strategy="afterInteractive"
