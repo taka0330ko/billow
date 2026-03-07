@@ -41,6 +41,15 @@ export default function ChatStartPage() {
         setInputValue("");
     }
 
+    const quickActionSubmit = (value: string) => {
+        const message = value.trim();
+        if(!message) return;
+
+        const roomId = createRoom(message);
+        router.push(`/app/chat/${roomId}`)
+
+    }
+
     return (
 
         <div className='flex flex-col mt-24 items-center h-svh'>
@@ -55,17 +64,25 @@ export default function ChatStartPage() {
                 <CardContent>
                     <div className="flex justify-evenly gap-2 w-full">
                         <Button 
-                        variant="quickActionBtn" className="py-14 "><CircleCheck />Monthly spend</Button>
+                        variant="quickActionBtn" 
+                        className="py-14 cursor-pointer"
+                        onClick={()=> quickActionSubmit("Monthly spend")}><CircleCheck />Monthly spend</Button>
                         <Button 
-                         variant="quickActionBtn" className="py-14"><Users />Add new member</Button>
+                         variant="quickActionBtn" 
+                         className="py-14 cursor-pointer"
+                         onClick={()=> quickActionSubmit("Add new member")}><Users />Add new member</Button>
                         <Button 
-                        variant="quickActionBtn" className="py-14"><CreditCard />My subscription</Button>
+                        variant="quickActionBtn" 
+                        className="py-14 cursor-pointer"
+                        onClick={()=> quickActionSubmit("My subscription")}><CreditCard />My subscription</Button>
                         <Button 
-                         variant="quickActionBtn" className="py-14"><FileText />Generate report</Button>
+                         variant="quickActionBtn" 
+                         className="py-14 cursor-pointer"
+                         onClick={()=> quickActionSubmit("Generate report")}><FileText />Generate report</Button>
                     </div>
                     <div className="mt-6">
                         <div className="relative w-full">
-                            <form onSubmit={handleSubmit}>
+                            <form onSubmit={handleSubmit}  autoComplete="off">
                                 <Input
                                     id="chat-start-input"
                                     placeholder="Ask billow anything..."
