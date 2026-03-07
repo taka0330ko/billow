@@ -8,8 +8,9 @@ type ChatMessage = {
 
 type ScrollableChatProps = {
     messages: ChatMessage[]
+    isAiThinking: boolean
 }
-function ScrollableChat({messages}:ScrollableChatProps) {
+function ScrollableChat({messages, isAiThinking}:ScrollableChatProps) {
   const messageEndRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToBottom = ():void =>{
@@ -39,6 +40,11 @@ function ScrollableChat({messages}:ScrollableChatProps) {
                   </p>
                 </div>
               ))}
+                            {isAiThinking && (
+                <div className="flex p-4 justify-start">
+                  <p className="mb-2 text-sm text-gray-400">Thinking...</p>
+                </div>
+              )}
                         <div ref={messageEndRef}></div>
             </div>
         </div>

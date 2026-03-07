@@ -1,7 +1,7 @@
 "use client"
 import { useParams } from "next/navigation"
 import { useChatStore } from "@/app/store/chatStore"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import ScrollableChat from "@/components/ScrollableChat"
 import ChatRoomInput from "@/components/ui/ChatRoomInput"
 
@@ -33,6 +33,7 @@ function extractAiText(res: unknown): string {
 
 export default function ChatRoomPage() {
   const addMessage = useChatStore((state)=> state.addMessage);
+  const [isAiThinking, setIsAiThinking] = useState(false);
   const refFirstRef = useRef<boolean>(true);
 
   const params = useParams()
@@ -87,10 +88,14 @@ useEffect(()=>{
       if (typeof chatUnknown !== "function") return
 
       const chat = chatUnknown as (prompt: string) => Promise<unknown>
+      setIsAiThinking(true);
+      try{
       const res = await chat(firstMessage)
       const aiText = extractAiText(res)
-    
     addMessage(chatId, "assistant", aiText)
+      } finally{
+        setIsAiThinking(false);
+      }
   }
   initialAiRes();
   },[room, chatId, addMessage])
@@ -109,12 +114,15 @@ useEffect(()=>{
       console.warn("[puter] ai.chat not ready")
       return
     }
+    setIsAiThinking(true)
+    try{
     const chat = chatUnknown as (prompt: string) => Promise<unknown>
-    
     const res = await chat(message)
     const aiText = extractAiText(res)
-
     addMessage(chatId, "assistant", aiText)
+    } finally {
+   setIsAiThinking(false)
+    }
   }
   
   
@@ -124,7 +132,7 @@ useEffect(()=>{
       <h1 className="text-2xl mb-4">{room.title}</h1>
 
         <div className="flex flex-col min-h-0 flex-1 relative">
-          <ScrollableChat messages ={room.messages}/>
+          <ScrollableChat messages ={room.messages} isAiThinking={isAiThinking}/>
           <ChatRoomInput handleSubmit={handleSubmit}/>
         </div>
 
