@@ -4,6 +4,7 @@ import { useChatStore } from "@/app/store/chatStore"
 import { useEffect, useRef, useState } from "react"
 import ScrollableChat from "@/components/ScrollableChat"
 import ChatRoomInput from "@/components/ui/ChatRoomInput"
+import { systemPrompt } from "@/lib/ai/systemPrompt"
 
 //何が返ってきても、とにかく最終的に string にして返す安全フィルター
 function extractAiText(res: unknown): string {
@@ -29,6 +30,32 @@ function extractAiText(res: unknown): string {
   }
 
   return ""
+}
+
+// LocalChatMessage という型は
+
+// role: "user" か "assistant"
+// content: 文字列
+
+// を持つオブジェクト
+type LocalChatMessage = {
+  role: "user" | "assistant";
+  content: string;
+}
+
+// ローカルのチャット履歴に systemPrompt を追加して、AI API用の messages 配列を作る関数
+function withSystemPrompt(messages: LocalChatMessage[]){
+  return[
+    {role: "system" as const, content: systemPrompt},
+    ...messages.map((m) => ({ role: m.role, content:m.content}))
+  ]
+}
+//AIに配列で渡して失敗した時のための、「文字列プロンプト」を作る関数
+function buildPromptWithSystem(messages: LocalChatMessage[]) {
+  const history = messages
+  .map((m) => `${m.role === "user" ? "User" : "Assistant"}: ${m.content}`)
+  .join("\n")
+  return `${systemPrompt}\n\n${history}\nAssistant:`
 }
 
 export default function ChatRoomPage() {
@@ -66,7 +93,28 @@ export default function ChatRoomPage() {
   const room = useChatStore((state)=>
   state.rooms[chatId])
 
+const callAi = async (messages: LocalChatMessage[])=>{
+  const chatUnknown: unknown = window?.puter?.ai?.chat
+  if(typeof chatUnknown !== "function") return ""
 
+  const chat = chatUnknown as (
+    input: 
+    | string
+    | {
+      messages: {role: "user" | "assistant" | "system";  content: string}[]
+      model?: string
+    }
+  ) => Promise<unknown>
+
+  try {
+    const res = await chat({messages: withSystemPrompt(messages)})
+    return extractAiText(res)
+  } catch {
+    const prompt = buildPromptWithSystem(messages)
+    const res = await chat(prompt)
+    return extractAiText(res)
+  }
+}
 //strict modeで2回レンダーされるのでuseRefでガード
 //useRef は 再レンダーしても値が保持される変数
 // NOTE:useRef 依存の設計なので改善すべき
@@ -81,20 +129,16 @@ useEffect(()=>{
   
 //最初のAIからのレスポンス。最初のチャットページのメッセージ（一番目）を取得
   const initialAiRes = async() =>{
-    
-      const firstMessage = room.messages[0]?.content ?? ""
-
-      const chatUnknown: unknown = window?.puter?.ai?.chat
-      if (typeof chatUnknown !== "function") return
-
-      const chat = chatUnknown as (prompt: string) => Promise<unknown>
-      setIsAiThinking(true);
+     setIsAiThinking(true);
       try{
-      const res = await chat(firstMessage)
-      const aiText = extractAiText(res)
-    addMessage(chatId, "assistant", aiText)
-      } finally{
-        setIsAiThinking(false);
+      const aiText = await callAi(room.messages)
+      if (aiText) {
+        addMessage(chatId, "assistant", aiText)
+      }
+      } catch (error){
+        console.error("[puter] initial chat failed", error)
+      } finally {
+        setIsAiThinking(false)
       }
   }
   initialAiRes();
@@ -106,24 +150,23 @@ useEffect(()=>{
 
   const handleSubmit = async (message: string) =>{
     addMessage(chatId, "user", message)
-
-
-    //AIのレスポンスをunknown に落とす
-    const chatUnknown: unknown = window?.puter?.ai?.chat
-    if (typeof chatUnknown !== "function") {
-      console.warn("[puter] ai.chat not ready")
-      return
-    }
+    const historyWithNewMessage: LocalChatMessage[] = [
+      ...room.messages.map((m) => ({ role: m.role, content: m.content })),
+      { role: "user", content: message },
+    ]
     setIsAiThinking(true)
     try{
-    const chat = chatUnknown as (prompt: string) => Promise<unknown>
-    const res = await chat(message)
-    const aiText = extractAiText(res)
-    addMessage(chatId, "assistant", aiText)
+    const aiText = await callAi(historyWithNewMessage)
+    if (aiText) {
+      addMessage(chatId, "assistant", aiText)
+    }
+    } catch (error) {
+      console.error("[puter] chat failed", error)
     } finally {
    setIsAiThinking(false)
     }
   }
+  
   
   
 

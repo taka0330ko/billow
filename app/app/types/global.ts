@@ -1,3 +1,10 @@
+// TypeScriptに「windowにputerがある」ことを教えるための宣言ファイル
+
+// window
+//  └ puter
+//     └ ai
+//        └ chat()
+
 declare global {
   interface Window {
     puter?: {
