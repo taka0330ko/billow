@@ -8,7 +8,7 @@ import Script from "next/script";
 export default function WorkSpaceLayout({ children }: { children: React.ReactNode }) {
     return (
         <SidebarProvider>
-            <div className="grid min-h-svh grid-rows-[64px_1fr] bg-background overflow-hidden overscroll-none w-full">
+            <div className="grid min-h-svh grid-rows-[64px_1fr] bg-background overflow-hidden  w-full">
                 <Header />
                 <div className="flex min-h-0">
                     <AppSidebar />
