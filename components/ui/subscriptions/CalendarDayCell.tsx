@@ -1,9 +1,14 @@
+import Image from "next/image"
+
+import { subscriptionIconMap } from "@/lib/subscription/icons"
+import { Subscription } from "@/lib/subscription/types"
 import { cn } from "@/lib/utils"
 
 type CalendarDayCellProps = {
   dayNumber?: number
   isCurrentMonth?: boolean
   isToday?: boolean
+  subscriptions?: Subscription[]
   className?: string
 }
 
@@ -11,6 +16,7 @@ function CalendarDayCell({
   dayNumber,
   isCurrentMonth = true,
   isToday = false,
+  subscriptions = [],
   className,
 }: CalendarDayCellProps) {
   const isPlaceholder = dayNumber === undefined
@@ -26,14 +32,38 @@ function CalendarDayCell({
       )}
     >
       {!isPlaceholder && (
-        <span
-          className={cn(
-            "text-sm font-medium tracking-tight text-zinc-300",
-            isToday && "text-primary-foreground"
+        <div className="flex w-full flex-col justify-between">
+          <span
+            className={cn(
+              "text-sm font-medium tracking-tight text-zinc-300",
+              isToday && "text-primary-foreground"
+            )}
+          >
+            {dayNumber}
+          </span>
+
+          {subscriptions.length > 0 && (
+            <div className="m-auto">
+              {subscriptions.map((subscription) => (
+                <div
+                  key={subscription.id}
+                  className={cn(
+                    "flex size-5 items-center justify-center ",
+                    isToday && "bg-primary-foreground"
+                  )}
+                >
+                  <Image
+                    src={subscriptionIconMap[subscription.iconKey]}
+                    alt={subscription.name}
+                    width={24}
+                    height={24}
+                    className="size-6 object-contain"
+                  />
+                </div>
+              ))}
+            </div>
           )}
-        >
-          {dayNumber}
-        </span>
+        </div>
       )}
     </div>
   )

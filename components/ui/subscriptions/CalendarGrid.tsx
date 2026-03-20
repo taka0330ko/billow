@@ -1,8 +1,10 @@
 import CalendarDayCell from "@/components/ui/subscriptions/CalendarDayCell"
+import { Subscription } from "@/lib/subscription/types"
 import { cn } from "@/lib/utils"
 
 type CalendarGridProps = {
   currentDate: Date
+  subscriptions: Subscription[]
   className?: string
 }
 
@@ -61,7 +63,33 @@ function buildCalendarCells(currentDate: Date): CalendarCell[] {
   return cells
 }
 
-function CalendarGrid({ currentDate, className }: CalendarGridProps) {
+function isSameCalendarDate(
+  isoDate: string | undefined,
+  currentDate: Date,
+  dayNumber: number | undefined
+) {
+  if (!isoDate || dayNumber === undefined) {
+    return false
+  }
+
+  const [year, month, day] = isoDate.split("-").map(Number)
+
+  if (!year || !month || !day) {
+    return false
+  }
+
+  return (
+    year === currentDate.getFullYear() &&
+    month - 1 === currentDate.getMonth() &&
+    day === dayNumber
+  )
+}
+
+function CalendarGrid({
+  currentDate,
+  subscriptions,
+  className,
+}: CalendarGridProps) {
   const cells = buildCalendarCells(currentDate)
   const today = new Date()
 
@@ -74,6 +102,13 @@ function CalendarGrid({ currentDate, className }: CalendarGridProps) {
           today.getFullYear() === currentDate.getFullYear() &&
           today.getMonth() === currentDate.getMonth() &&
           today.getDate() === cell.dayNumber
+        const cellSubscriptions = subscriptions.filter((subscription) =>
+          isSameCalendarDate(
+            subscription.nextBillingDate,
+            currentDate,
+            cell.dayNumber
+          )
+        )
 
         return (
           <CalendarDayCell
@@ -81,6 +116,7 @@ function CalendarGrid({ currentDate, className }: CalendarGridProps) {
             dayNumber={cell.dayNumber}
             isCurrentMonth={cell.isCurrentMonth}
             isToday={isToday}
+            subscriptions={cellSubscriptions}
           />
         )
       })}

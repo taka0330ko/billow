@@ -1,0 +1,58 @@
+import { Member } from "./types";
+
+export const members: Member[] = [
+  {
+    id: "alex",
+    name: "Alex Kim",
+    role: "Product Designer",
+    avatarKey: "alex",
+    email: "alex@studio.com",
+    toolIds: ["figma-pro", "chatgpt-plus"],
+    status: "active",
+  },
+  {
+    id: "amir",
+    name: "Amir Khan",
+    role: "Frontend Developer",
+    avatarKey: "amir",
+    email: "amir@studio.com",
+    toolIds: ["vercel-pro", "slack-pro", "chatgpt-plus"],
+    status: "active",
+  },
+  {
+    id: "daniel",
+    name: "Daniel Lee",
+    role: "Backend Developer",
+    avatarKey: "daniel",
+    email: "daniel@studio.com",
+    toolIds: ["vercel-pro", "slack-pro"],
+    status: "active",
+  },
+  {
+    id: "lucas",
+    name: "Lucas Park",
+    role: "Founder",
+    avatarKey: "lucas",
+    email: "lucas@studio.com",
+    toolIds: ["vercel-pro", "slack-pro", "chatgpt-plus"],
+    status: "active",
+  },
+  {
+    id: "olivia",
+    name: "Olivia Chen",
+    role: "Marketing Lead",
+    avatarKey: "olivia",
+    email: "olivia@studio.com",
+    toolIds: ["adobe-cc", "slack-pro"],
+    status: "inactive",
+  },
+  {
+    id: "tina",
+    name: "Tina Wong",
+    role: "Operations",
+    avatarKey: "tina",
+    email: "tina@studio.com",
+    toolIds: ["slack-pro"],
+    status: "active",
+  },
+];

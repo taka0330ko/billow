@@ -3,6 +3,7 @@
 import CalenderHeader from "@/components/ui/subscriptions/CalenderHeader"
 import CalendarGrid from "@/components/ui/subscriptions/CalendarGrid"
 import CalendarWeekdays from "@/components/ui/subscriptions/CalendarWeekdays"
+import { subscriptions } from "@/lib/subscription/data"
 import { useState } from "react"
 
 function getPreviousMonth(date: Date) {
@@ -25,7 +26,7 @@ export default function SubscriptionsPage() {
           onNextMonth={() => setCurrentDate(getNextMonth(currentDate))}
         />
         <CalendarWeekdays />
-        <CalendarGrid currentDate={currentDate} />
+        <CalendarGrid currentDate={currentDate} subscriptions={subscriptions} />
       </div>
     </section>
   )

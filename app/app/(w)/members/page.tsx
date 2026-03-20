@@ -1,9 +1,10 @@
-import React from 'react'
+"use client"
 
-export default function page() {
+import MembersList from "@/components/ui/member/MembersList"
+export default function MemberPage() {
     return (
         <div>
-
+            <MembersList/>
         </div>
     )
 }

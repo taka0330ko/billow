@@ -9,16 +9,25 @@ export type SubscriptionStatus =
 export type SubscriptionCategory =
   | "Design"
   | "Development"
-  | "Productivity"
+  | "Communication"
   | "AI"
   | "Entertainment";
+
+  export type SubscriptionIconKey = 
+  | "figma"
+  | "vercel"
+  | "slack"
+  | "chatgpt"
+  | "adobe";
 
 export interface Subscription {
   id: string;
   name: string;
+  plan: string;
   category: SubscriptionCategory;
   price: number;
   billingCycle: BillingCycle;
+  iconKey: SubscriptionIconKey;
 
   team?: boolean;
   seats?: number;
