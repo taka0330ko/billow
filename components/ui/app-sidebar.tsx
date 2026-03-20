@@ -73,7 +73,7 @@ export function AppSidebar() {
                             {isChatRoute && (
                                 <div className="border-l border-white/20 ml-2 group-data-[collapsible=icon]:hidden">  
                                 <p className="pl-4 text-white/40 flex gap-2 items-center">History<History className="w-4"/></p>                                  
-                                <div className="history-scroll max-h-56 overflow-y-auto">
+                                <div className="custom-scroll max-h-56 overflow-y-auto">
                                     {roomList.map((room) => (
                                             <SidebarMenuItem key={room.id}>
                                                 <SidebarMenuButton

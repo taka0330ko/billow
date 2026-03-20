@@ -208,20 +208,20 @@
 }
 
 @layer components {
-  .history-scroll::-webkit-scrollbar {
+  .custom-scroll::-webkit-scrollbar {
   width: 8px;
 }
 
-.history-scroll::-webkit-scrollbar-track {
+.custom-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.history-scroll::-webkit-scrollbar-thumb {
+.custom-scroll::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.18);
   border-radius: 9999px;
 }
 
-.history-scroll::-webkit-scrollbar-thumb:hover {
+.custom-scroll::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.28);
 }
 }
