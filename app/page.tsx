@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function LpPage() {
   return (
 
-    <div className="min-h-screen bg-lp-background">
+    <div className="min-h-screen">
       <header className="px-8 py-4">
         <Image
           src={"/images/Billow.svg"}

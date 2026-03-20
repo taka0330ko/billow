@@ -32,8 +32,8 @@ export function AppSidebar() {
     //Forcibly adjust the sidebar height slightly
         <Sidebar
         className="
-        top-(--header-h)!
-        h-[calc(100svh-var(--header-h))]!
+        top-(--header-height)!
+        h-[calc(100svh-var(--header-height))]!
         "
             collapsible="icon">
             <SidebarHeader>

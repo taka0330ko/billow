@@ -15,7 +15,7 @@ export default function WorkSpaceLayout({ children }: { children: React.ReactNod
 
                     <SidebarInset className="
           flex min-h-svh flex-col bg-background
-          pt-(--header-h)
+          pt-(--header-height)
         ">
                         <SidebarTrigger />
                         {children}
