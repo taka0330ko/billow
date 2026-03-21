@@ -27,7 +27,7 @@ function MembersList({ selectedMemberId, onSelectMember }: MembersListProps) {
                 onClick={() => onSelectMember(member)}
               >
                 <div
-                  className={`rounded-full p-[2px] transition ${
+                  className={`rounded-full p-0.5 transition ${
                     isSelected ? "bg-blue-500 shadow-[0_0_0_3px_rgba(59,130,246,0.2)]" : "bg-transparent"
                   }`}
                 >

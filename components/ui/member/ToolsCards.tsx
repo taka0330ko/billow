@@ -1,11 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { Plus, Search } from "lucide-react";
+import { Plus } from "lucide-react";
 import { memberAvatarMap } from "@/lib/member/avatar";
 import { members } from "@/lib/member/data";
 import { subscriptions } from "@/lib/subscription/data";
 import { subscriptionIconMap } from "@/lib/subscription/icons";
+import { Subscription } from "@/lib/subscription/types";
+
+type ToolsCardsProps = {
+  items?: Subscription[];
+};
 
 const formatPrice = (price: number, isTeam: boolean) => {
   const formattedPrice =
@@ -23,28 +28,10 @@ const formatNextDue = (dateString?: string) => {
   }).format(new Date(dateString));
 };
 
-function ToolsCards() {
-  const visibleSubscriptions = subscriptions;
+function ToolsCards({ items = subscriptions }: ToolsCardsProps) {
+  const visibleSubscriptions = items;
 
-  return (
-    <section className="h-full px-6 pb-8 pt-2">
-      <div className="flex h-full min-h-0 flex-col gap-4">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <h3 className="text-3xl font-medium tracking-tight text-white">
-            Available Tools
-          </h3>
-          <label className="flex h-12 w-full items-center rounded-full border border-white/15 bg-[#171922] px-4 text-zinc-400 lg:max-w-sm">
-            <Search className="mr-3 size-4 shrink-0" />
-            <input
-              type="text"
-              value=""
-              readOnly
-              placeholder="Search tool or member..."
-              className="w-full bg-transparent text-sm outline-none placeholder:text-zinc-500"
-            />
-          </label>
-        </div>
-
+  return ( 
         <div className="custom-scroll h-100 min-h-0 overflow-y-auto pr-2 ">
           <div className="flex flex-col gap-4">
             {visibleSubscriptions.map((subscription) => {
@@ -73,7 +60,7 @@ function ToolsCards() {
                       </div>
                       <div className="min-w-0">
                         <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                          <h4 className="text-2xl font-medium tracking-tight text-white">
+                          <h4 className="text-xl font-medium tracking-tight text-white">
                             {subscription.name}
                           </h4>
                           <span className="text-sm text-zinc-400">
@@ -91,7 +78,8 @@ function ToolsCards() {
                     </button>
                   </div>
 
-                  <div className="mt-4 grid gap-4 text-sm text-zinc-300 sm:grid-cols-[1.15fr_1.15fr_0.9fr_0.8fr_1.3fr] sm:items-center">
+                  {/* Tools Info */}
+                  <div className="mt-4 grid gap-4 text-sm text-zinc-300 md:grid-cols-[repeat(auto-fit,minmax(100px,1fr))]">
                     <div>
                       <p className="text-xs uppercase tracking-[0.16em] text-zinc-500">
                         Plan
@@ -143,13 +131,12 @@ function ToolsCards() {
                       </div>
                     </div>
                   </div>
+
                 </article>
               );
             })}
           </div>
         </div>
-      </div>
-    </section>
   );
 }
 

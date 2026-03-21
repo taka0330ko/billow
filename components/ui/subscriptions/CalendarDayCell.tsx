@@ -8,7 +8,9 @@ type CalendarDayCellProps = {
   dayNumber?: number
   isCurrentMonth?: boolean
   isToday?: boolean
+  isSelected?: boolean
   subscriptions?: Subscription[]
+  onClick?: () => void
   className?: string
 }
 
@@ -16,18 +18,26 @@ function CalendarDayCell({
   dayNumber,
   isCurrentMonth = true,
   isToday = false,
+  isSelected = false,
   subscriptions = [],
+  onClick,
   className,
 }: CalendarDayCellProps) {
   const isPlaceholder = dayNumber === undefined
 
   return (
-    <div
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={isPlaceholder}
       className={cn(
-        "flex aspect-square min-h-16 rounded-[18px] border border-white/10 bg-black p-2.5",
+        "flex aspect-square min-h-16 w-full rounded-[18px] border border-white/10 bg-black p-2.5 text-left",
         !isCurrentMonth && "opacity-40",
         isToday && "border-primary bg-primary",
         isPlaceholder && "border-transparent",
+        !isPlaceholder && "transition hover:border-white/20",
+        isSelected && !isToday && "border-white/20",
+        isPlaceholder && "cursor-default",
         className
       )}
     >
@@ -65,7 +75,7 @@ function CalendarDayCell({
           )}
         </div>
       )}
-    </div>
+    </button>
   )
 }
 

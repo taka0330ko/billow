@@ -22,7 +22,7 @@ function ToolsForMember({ member }: ToolsForMemberProps) {
       <div className="flex h-full min-h-0 flex-col gap-4">
         <div className="flex flex-wrap items-center gap-4">
           <div>
-            <h3 className="text-3xl font-medium tracking-tight text-white">
+            <h3 className="text-2xl font-medium tracking-tight text-white">
               Tools for {member.name.split(" ")[0]}
             </h3>
           </div>
@@ -67,12 +67,12 @@ function ToolsForMember({ member }: ToolsForMemberProps) {
 
                   <div className="mt-8 grid grid-cols-[1fr_auto] gap-6">
                     <div className="self-end">
-                      <p className="text-3xl font-semibold text-white">
+                      <p className="mt-2 text-md text-zinc-400">
+                        {subscription.plan}
+                      </p>
+                      <p className="text-xl  text-white">
                         {assignedMembers.length}
                         {subscription.seats ? `/${subscription.seats}` : ""}
-                      </p>
-                      <p className="mt-2 text-lg text-zinc-400">
-                        {subscription.plan}
                       </p>
                     </div>
 

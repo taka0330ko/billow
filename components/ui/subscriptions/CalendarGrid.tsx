@@ -5,6 +5,9 @@ import { cn } from "@/lib/utils"
 type CalendarGridProps = {
   currentDate: Date
   subscriptions: Subscription[]
+  selectedDate?: Date | null
+  onSelectDate?: (date: Date) => void
+  onSelectSubscriptions?: (subscriptions: Subscription[]) => void
   className?: string
 }
 
@@ -85,9 +88,28 @@ function isSameCalendarDate(
   )
 }
 
+function isSelectedCalendarDate(
+  selectedDate: Date | null | undefined,
+  currentDate: Date,
+  dayNumber: number | undefined
+) {
+  if (!selectedDate || dayNumber === undefined) {
+    return false
+  }
+
+  return (
+    selectedDate.getFullYear() === currentDate.getFullYear() &&
+    selectedDate.getMonth() === currentDate.getMonth() &&
+    selectedDate.getDate() === dayNumber
+  )
+}
+
 function CalendarGrid({
   currentDate,
   subscriptions,
+  selectedDate,
+  onSelectDate,
+  onSelectSubscriptions,
   className,
 }: CalendarGridProps) {
   const cells = buildCalendarCells(currentDate)
@@ -109,6 +131,11 @@ function CalendarGrid({
             cell.dayNumber
           )
         )
+        const isSelected = isSelectedCalendarDate(
+          selectedDate,
+          currentDate,
+          cell.dayNumber
+        )
 
         return (
           <CalendarDayCell
@@ -116,7 +143,22 @@ function CalendarGrid({
             dayNumber={cell.dayNumber}
             isCurrentMonth={cell.isCurrentMonth}
             isToday={isToday}
+            isSelected={isSelected}
             subscriptions={cellSubscriptions}
+            onClick={() => {
+              if (cell.dayNumber === undefined) {
+                return
+              }
+
+              onSelectDate?.(
+                new Date(
+                  currentDate.getFullYear(),
+                  currentDate.getMonth(),
+                  cell.dayNumber
+                )
+              )
+              onSelectSubscriptions?.(cellSubscriptions)
+            }}
           />
         )
       })}
