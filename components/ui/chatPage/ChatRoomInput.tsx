@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Input } from "./input"
+import { Input } from "../globalUI/input"
 import { ArrowUp, Plus } from "lucide-react";
 
 type ChatRoomInputPros = {

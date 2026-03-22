@@ -1,7 +1,7 @@
-import { AppSidebar } from "@/components/ui/app-sidebar";
-import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
-import Header from "@/components/header";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/ui/sideBar/app-sidebar";
+import { SidebarProvider, SidebarInset } from "@/components/ui/sideBar/sidebar";
+import Header from "@/components/ui/globalUI/header";
+import { SidebarTrigger } from "@/components/ui/sideBar/sidebar";
 import Script from "next/script";
 
 

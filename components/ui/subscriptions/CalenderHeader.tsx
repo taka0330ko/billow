@@ -2,7 +2,7 @@
 
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/globalUI/button"
 import { cn } from "@/lib/utils"
 
 type CalenderHeaderProps = {

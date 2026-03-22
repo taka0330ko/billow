@@ -23,7 +23,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sideBar/sidebar"
 import Link from "next/link"
 
 export function AppSidebar() {

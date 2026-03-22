@@ -2,8 +2,8 @@
 import { useParams } from "next/navigation"
 import { useChatStore } from "@/app/store/chatStore"
 import { useEffect, useRef, useState } from "react"
-import ScrollableChat from "@/components/ScrollableChat"
-import ChatRoomInput from "@/components/ui/ChatRoomInput"
+import ScrollableChat from "@/components/ui/chatPage/ScrollableChat"
+import ChatRoomInput from "@/components/ui/chatPage/ChatRoomInput"
 import { systemPrompt } from "@/lib/ai/systemPrompt"
 
 //何が返ってきても、とにかく最終的に string にして返す安全フィルター

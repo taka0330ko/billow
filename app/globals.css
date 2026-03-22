@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
 
 /*
  * Billow design tokens.
@@ -12,38 +11,37 @@
 :root {
   /* Layout */
   --radius: 0.625rem;
-  --header-height: 64px; 
-
+  
   /* Primitive palette: neutrals */
-  --white: #ffffff;
-  --gray-50: #e8e8e8;
-  --gray-100: #c1c1c5;
-  --gray-200: #a2a3a9;
-  --gray-300: #83848c;
-  --gray-400: #64656f;
-  --gray-500: #454652;
-  --gray-600: #3a3a44;
-  --gray-700: #2e2f37;
-  --gray-800: #232329;
-  --gray-900: #17171b;
-  --black: #0c0f15;
+  --white: oklch(1 0 0);
+  --gray-50: oklch(0.931 0 0);
+  --gray-100: oklch(0.8121 0.0055 286.28);
+  --gray-200: oklch(0.7165 0.0087 278.58);
+  --gray-300: oklch(0.6151 0.012 280.34);
+  --gray-400: oklch(0.5094 0.0158 281.27);
+  --gray-500: oklch(0.3978 0.0201 281.67);
+  --gray-600: oklch(0.3524 0.0172 285.48);
+  --gray-700: oklch(0.3074 0.0144 279.87);
+  --gray-800: oklch(0.2587 0.0112 285.59);
+  --gray-900: oklch(0.2064 0.0079 285.69);
+  --black: oklch(0.1681 0.0135 264.11);
 
   /* Primitive palette: alpha variants */
-  --gray-50-alpha-50: #e8e8e880; 
-  --gray-100-alpha-50: #c1c1c580; 
-  --gray-500-alpha-50: #45465280; 
-  --gray-600-alpha-30: #3a3a444d; 
+  --gray-50-alpha-50: oklch(0.931 0 0 / 50.2%); 
+  --gray-100-alpha-50: oklch(0.8121 0.0055 286.28 / 50.2%); 
+  --gray-500-alpha-50: oklch(0.3978 0.0201 281.67 / 50.2%); 
+  --gray-600-alpha-30: oklch(0.3524 0.0172 285.48 / 30.2%); 
 
   /* Primitive palette: brand blues */
-  --blue-100: #bdcdff; 
-  --blue-200: #9db4ff; 
-  --blue-300: #7c9aff; 
-  --blue-400: #5b81ff; 
-  --blue-500: #3a68ff; 
-  --blue-600: #3057d5; 
-  --blue-700: #2745aa; 
-  --blue-800: #1d3480; 
-  --blue-900: #132355; 
+  --blue-100: oklch(0.8531 0.0721 270.97); 
+  --blue-200: oklch(0.7812 0.1105 270.63); 
+  --blue-300: oklch(0.7082 0.1516 269.74); 
+  --blue-400: oklch(0.6405 0.1916 268.02); 
+  --blue-500: oklch(0.5787 0.2298 266.16); 
+  --blue-600: oklch(0.5084 0.1986 266.14); 
+  --blue-700: oklch(0.4332 0.1658 266.61); 
+  --blue-800: oklch(0.3571 0.1316 266.72); 
+  --blue-900: oklch(0.2761 0.0933 266.75); 
 
   /* Semantic tokens: app surfaces + text
    * Changed naming strategy:
@@ -52,12 +50,25 @@
    */
   --background: var(--black);
   --foreground: var(--gray-50);
-  --card: var(--gray-500-alpha-50);
+  --card: var(--gray-800);
   --card-foreground: var(--gray-50);
-  --popover: var(--gray-800);
-  --popover-foreground: var(--gray-50);
+  /* --popover: var(--gray-800);
+  --popover-foreground: var(--gray-50); */
 
   /* Semantic tokens: actions */
+
+  /* text */
+  --primary-text: var(--gray-50);
+  --secondary-text: var(--gray-200);
+  --placeholder-text: var(--gray-300);
+
+  /* UI */
+  --active: var(--blue-500);
+  --inactive: var(--gray-200);
+  --muted-foreground: var(--gray-200);
+  --accent: var(--gray-700);
+  --accent-foreground: var(--gray-50);
+
   --primary: var(--blue-500);
   --primary-foreground: var(--gray-50);
   --secondary: var(--gray-800);
@@ -74,11 +85,11 @@
   --ring: var(--blue-500);
 
   /* Semantic tokens: data viz */
-  --chart-1: oklch(0.646 0.222 41.116);
+  /* --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  --chart-5: oklch(0.769 0.188 70.08); */
 
   /* Semantic tokens: sidebar */
   --sidebar: var(--black);
@@ -102,20 +113,6 @@
   --placeholder-text: var(--gray-300); 
 }
 
-/*
- * Dark mode currently mirrors the app default in most places.
- * Only keep actual differences here to reduce noise.
- */
-.dark {
-  --primary-copy: var(--gray-50);
-
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-}
-
 @theme inline {
   /* Typography */
   --font-sans: var(--font-body);
@@ -129,8 +126,6 @@
   /* App surfaces */
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
 
   /* Actions + states */
   --color-primary: var(--primary);
@@ -141,7 +136,6 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
 
   /* Borders + focus */
   --color-border: var(--border);
@@ -159,11 +153,11 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   /* Charts */
-  --color-chart-1: var(--chart-1);
+  /* --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
+  --color-chart-5: var(--chart-5); */
 
   /* Radius scale used by shadcn primitives */
   --radius-sm: calc(var(--radius) - 4px);
@@ -202,7 +196,11 @@
 
 @layer utilities {
   .bg-billow-sidebar-gradient {
-    background: var(--sidebar-gradient); /* renamed from --gradient-billow-sidebar */
+    background: linear-gradient(
+    180deg,
+    var(--black) 70%,
+    var(--blue-700) 100%
+  ); ; /* renamed from --gradient-billow-sidebar */
   }
 
 }
@@ -217,11 +215,11 @@
 }
 
 .custom-scroll::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.18);
+  background: oklch(1 0 0 / 18%);
   border-radius: 9999px;
 }
 
 .custom-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.28);
+  background: oklch(1 0 0 / 28%);
 }
 }

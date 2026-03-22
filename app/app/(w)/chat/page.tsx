@@ -1,5 +1,5 @@
 "use client"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/globalUI/button"
 import { useChatStore } from "@/app/store/chatStore"
 
 import {
@@ -7,9 +7,9 @@ import {
     CardHeader,
     CardTitle,
     CardContent
-} from "@/components/ui/card"
+} from "@/components/ui/globalUI/card"
 
-import { Input } from "@/components/ui/input"
+import { Input } from "@/components/ui/globalUI/input"
 
 import {
     CreditCard,
