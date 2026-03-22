@@ -45,8 +45,8 @@ function ScrollableChat({messages, isAiThinking}:ScrollableChatProps) {
                   <p
                   className={`mb-2
                   ${msg.role == "user"
-                    ? "bg-white rounded-lg rounded-br-[1px] px-2 py-1 text-gray-900"
-                  : "mb-16"}`}>
+                    ? "bg-card rounded-lg rounded-br-[1px] px-4 py-2 text-primary-text"
+                  : "mb-16 text-primary-text"}`}>
                      {msg.content}
                   </p>
                 </div>
@@ -62,7 +62,7 @@ function ScrollableChat({messages, isAiThinking}:ScrollableChatProps) {
                       className="mr-2 shrink-0 pointer-events-none select-none
                       animate-[bubbleScale_1.4s_ease-in-out_infinite]"
                     />
-                    <p className="text-gray-400 text-sm">Thinking...</p>
+                    <p className="text-primary-text text-sm">Thinking...</p>
                 </div>
               )}
                         <div ref={messageEndRef}></div>

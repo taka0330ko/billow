@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react"
 import ScrollableChat from "@/components/ui/chatPage/ScrollableChat"
 import ChatRoomInput from "@/components/ui/chatPage/ChatRoomInput"
 import { systemPrompt } from "@/lib/ai/systemPrompt"
+import { databaseContext } from "@/lib/ai/databaseContext"
 
 //何が返ってきても、とにかく最終的に string にして返す安全フィルター
 function extractAiText(res: unknown): string {
@@ -43,10 +44,12 @@ type LocalChatMessage = {
   content: string;
 }
 
+const systemMessageContent = `${systemPrompt}${databaseContext}`
+
 // ローカルのチャット履歴に systemPrompt を追加して、AI API用の messages 配列を作る関数
 function withSystemPrompt(messages: LocalChatMessage[]){
   return[
-    {role: "system" as const, content: systemPrompt},
+    {role: "system" as const, content: systemMessageContent},
     ...messages.map((m) => ({ role: m.role, content:m.content}))
   ]
 }
@@ -55,7 +58,7 @@ function buildPromptWithSystem(messages: LocalChatMessage[]) {
   const history = messages
   .map((m) => `${m.role === "user" ? "User" : "Assistant"}: ${m.content}`)
   .join("\n")
-  return `${systemPrompt}\n\n${history}\nAssistant:`
+  return `${systemMessageContent}\n\n${history}\nAssistant:`
 }
 
 export default function ChatRoomPage() {
@@ -153,7 +156,7 @@ useEffect(()=>{
   },[room, chatId, addMessage, isAiReady])
 
   if (!room) {
-    return <div className="p-10 text-white">Room not found</div>
+    return <div className="p-10 text-primary-text">Room not found</div>
   }
 
   const handleSubmit = async (message: string) =>{
@@ -179,7 +182,7 @@ useEffect(()=>{
   
 
   return (
-    <div className="flex flex-col p-8 text-white h-full">
+    <div className="flex flex-col p-8 text-primary-text h-full">
       <h1 className="text-2xl mb-4">{room.title}</h1>
 
         <div className="flex flex-col min-h-0 flex-1 relative">
