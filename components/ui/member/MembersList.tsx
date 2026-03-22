@@ -12,7 +12,7 @@ type MembersListProps = {
 
 function MembersList({ selectedMemberId, onSelectMember }: MembersListProps) {
   return (
-    <section className="min-h-full bg-background px-6 py-8">
+    <section className="min-h-full px-6 py-8">
       <div className="mx-auto flex w-full max-w-xl flex-col gap-4">
         <h2 className="text-2xl text-white">{members.length} Members</h2>
         <div className="flex flex-wrap gap-4">

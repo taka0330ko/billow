@@ -22,7 +22,7 @@ export default function SubscriptionsPage() {
   const [selectedSubscriptions, setSelectedSubscriptions] = useState<Subscription[]>([]);
   
   return (
-    <section className="min-h-full bg-background px-6 py-8">
+    <section className="min-h-full bg-workspace px-6 py-8">
       <div className="flex flex-col lg:grid lg:grid-cols-5 gap-4">
         <div className="flex w-full max-w-xl flex-col gap-4 mx-auto cols-start-1 col-span-3">
           <CalenderHeader

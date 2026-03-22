@@ -52,7 +52,7 @@ export default function ChatStartPage() {
 
     return (
 
-        <div className="flex min-h-full flex-col items-center justify-center px-6 py-10">
+        <div className="flex min-h-full flex-col items-center justify-center px-6 py-10 bg-workspace">
             <div className="flex p-6 items-end justify-between w-full max-w-160">
                 <h1 className="text-gray-300 text-4xl">Hi, Alex</h1>
                 <p className="text-gray-300">Burst creative group</p>

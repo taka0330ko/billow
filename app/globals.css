@@ -37,7 +37,7 @@
   --gray-50-alpha-50: oklch(0.931 0 0 / 50%);
   --gray-100-alpha-50: oklch(0.8121 0.0055 286.28 / 50%);
   --gray-500-alpha-50: oklch(0.3978 0.0201 281.67 / 50%);
-  --gray-600-alpha-30: oklch(0.3524 0.0172 285.48 / 30%);
+  --gray-800-alpha-50: oklch(0.2587 0.0112 285.59 / 50%);
 
   /* Brand blue palette */
   --blue-100: oklch(0.8531 0.0721 270.97);
@@ -65,7 +65,7 @@
   /* Surface colors */
   --color-background: var(--black);
   --color-lp-background: var(--gray-50);
-  --color-card: var(--gray-800);
+  --color-card: var(--gray-800-alpha-50);
   --color-quick-action: var(--gray-800);
 
   /* Interactive / state colors */
@@ -120,6 +120,12 @@
       var(--black) 70%,
       var(--blue-700) 100%
     );
+  }
+  .bg-workspace {
+    background-image: url("/images/billow-bg.png");
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
   }
 }
 
