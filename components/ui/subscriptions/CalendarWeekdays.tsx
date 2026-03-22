@@ -10,12 +10,12 @@ function CalendarWeekdays({ className }: CalendarWeekdaysProps) {
   return (
     <div className={cn("grid grid-cols-7 gap-3", className)}>
       {WEEKDAYS.map((day) => (
-        <div
+        <span
           key={day}
-          className="flex h-10 items-center justify-center rounded-full text-sm font-semibold tracking-wide text-zinc-400"
+          className="flex h-10 items-center justify-center rounded-full text-sm font-semibold tracking-wide "
         >
           {day}
-        </div>
+        </span>
       ))}
     </div>
   )

@@ -36,7 +36,7 @@ function ChatRoomInput({handleSubmit}:ChatRoomInputPros) {
                 <button type="button">Quick Action</button>
               </div>
             <p className="text-gray-400">Drag & Drop file here</p>
-            <button type="submit" className="px-4 py-1 rounded-full cursor-pointer hover:bg-primary"><ArrowUp/></button>
+            <button type="submit" className="px-4 py-1 rounded-full cursor-pointer hover:bg-active"><ArrowUp/></button>
             </div>
           </div>
         </form>

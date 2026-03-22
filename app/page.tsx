@@ -19,13 +19,13 @@ export default function LpPage() {
       <main className="m-16">
         <div className="flex flex-col items-center gap-8">
           <div className="mx-auto w-full max-w-360 px-6">
-            <h1 className="text-billow-primary-text text-5xl">
-              Lorem ipsum malesuada id tincidunt ut aliquam enim elementum.
+            <h1 className="text-lp-text text-5xl text-center">
+              Manage your team’s subscriptions in one place.
             </h1>
             <p className="text-2xl text-gray-500 mt-4">Manage your team subscriptions in one place. Track spending, organize plans, and make smarter business decisions with AI-powered insights.</p>
           </div>
           <Link href="/app">
-            <Button className="py-8 px-4 text-md cursor-pointer">Open Dashboard</Button>
+            <Button className="py-8 px-4 text-md cursor-pointer bg-(--blue-500) hover:bg-(--blue-600)">Open Dashboard</Button>
           </Link>
           <div>
             <Image

@@ -32,14 +32,14 @@ export default function MemberPage() {
           <h3 className="text-2xl font-medium tracking-tight text-white">
             Available Tools
           </h3>
-          <label className="flex h-12 w-full items-center rounded-full border max-w-80 border-white/15 bg-[#171922] px-4 text-zinc-400 lg:max-w-sm">
+          <label className="flex h-12 w-full items-center rounded-full border max-w-80 border-border bg-card px-4 text-secondary-text lg:max-w-sm">
             <Search className="mr-3 size-4 shrink-0" />
             <input
               type="text"
               value=""
               readOnly
               placeholder="Search tool or member..."
-              className="w-full bg-transparent text-sm outline-none placeholder:text-zinc-500"
+              className="w-full bg-transparent text-sm outline-none placeholder:text-zinc-500 cursor-not-allowed"
             />
           </label>
       </div>

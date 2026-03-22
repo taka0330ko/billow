@@ -14,7 +14,7 @@ const buttonVariants = cva(
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
 
         // Custom variants
-        quickActionBtn:"hover:bg-primary bg-quick-action-btn border border-border flex flex-col cursor-pointer",
+        quickActionBtn:"text-primary-text hover:bg-active bg-quick-action border border-border flex flex-col cursor-pointer",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

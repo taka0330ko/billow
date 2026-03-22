@@ -159,7 +159,7 @@ function Sidebar({
       <div
         data-slot="sidebar"
         className={cn(
-          "bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col",
+          "bg-sidebar text-secondary-text flex h-full w-(--sidebar-width) flex-col",
           className
         )}
         {...props}
@@ -373,7 +373,8 @@ const sidebarMenuButtonVariants = cva(
         default: "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
         outline:
           "bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))]",
-        billowSidebarBtn:"active:bg-transparent  data-[active=true]:bg-transparent data-[active=true]:text-primary text-secondary-foreground hover:text-foreground hover:bg-transparent",
+        billowSidebarBtn:
+          "active:bg-transparent data-[active=true]:bg-transparent text-secondary-text hover:text-primary-text hover:bg-transparent data-[active=true]:text-active [&>span]:text-secondary-text hover:[&>span]:text-primary-text data-[active=true]:[&>span]:text-active",
       },
       size: {
         default: "h-8 text-sm",

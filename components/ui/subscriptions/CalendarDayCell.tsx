@@ -31,12 +31,12 @@ function CalendarDayCell({
       onClick={onClick}
       disabled={isPlaceholder}
       className={cn(
-        "flex aspect-square min-h-16 w-full rounded-lg border border-white/10 bg-black p-2.5 text-left",
+        "flex aspect-square min-h-16 w-full rounded-lg border border-border-mute bg-black p-2.5 text-left",
         !isCurrentMonth && "opacity-40",
-        isToday && "border-primary bg-primary",
+        isToday && "border-primary bg-active text-primary-text",
         isPlaceholder && "border-transparent",
-        !isPlaceholder && "transition hover:border-white/20",
-        isSelected && !isToday && "border-white/20",
+        !isPlaceholder && "transition hover:border-border",
+        isSelected && !isToday && "border-border",
         isPlaceholder && "cursor-default",
         className
       )}
@@ -45,8 +45,8 @@ function CalendarDayCell({
         <div className="flex w-full flex-col justify-between">
           <span
             className={cn(
-              "text-sm font-medium tracking-tight text-zinc-300",
-              isToday && "text-primary-foreground"
+              "text-sm font-medium tracking-tight text-secondary-text",
+              isToday && "text-primary-text"
             )}
           >
             {dayNumber}
@@ -58,8 +58,8 @@ function CalendarDayCell({
                 <div
                   key={subscription.id}
                   className={cn(
-                    "flex size-5 items-center justify-center ",
-                    isToday && "bg-primary-foreground"
+                    "flex size-5 items-center justify-center",
+                    isToday && "bg-primary-text"
                   )}
                 >
                   <Image

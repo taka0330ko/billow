@@ -26,7 +26,7 @@ function CalenderHeader({
   return (
     <div
       className={cn(
-        "flex items-center justify-between gap-3 text-white",
+        "flex items-center justify-between gap-3",
         className
       )}
     >
@@ -35,7 +35,7 @@ function CalenderHeader({
         variant="ghost"
         size="icon"
         onClick={onPrevMonth}
-        className="size-10 rounded-full text-white hover:bg-white/10 hover:text-white"
+        className="size-10 rounded-full text-primary-text hover:bg-card"
         aria-label="Go to previous month"
       >
         <ChevronLeft className="size-7" />
@@ -44,18 +44,18 @@ function CalenderHeader({
       <div className="flex items-center gap-5">
         <button
           type="button"
-          className="flex items-center gap-2 text-3xl font-medium tracking-tight text-white"
+          className="flex items-center gap-2 text-3xl font-medium tracking-tight text-secondary-text"
         >
-          <span>{monthLabel}</span>
-          <ChevronDown className="size-6" />
+          <span className="text-primary-text">{monthLabel}</span>
+          <ChevronDown className="size-6 cursor-not-allowed" />
         </button>
 
         <button
           type="button"
-          className="flex items-center gap-2 text-3xl font-medium tracking-tight text-white"
+          className="flex items-center gap-2 text-3xl font-medium tracking-tight text-secondary-text"
         >
-          <span>{yearLabel}</span>
-          <ChevronDown className="size-6" />
+          <span className="text-primary-text">{yearLabel}</span>
+          <ChevronDown className="size-6 cursor-not-allowed" />
         </button>
       </div>
 
@@ -64,7 +64,7 @@ function CalenderHeader({
         variant="ghost"
         size="icon"
         onClick={onNextMonth}
-        className="size-10 rounded-full text-white hover:bg-white/10 hover:text-white"
+        className="size-10 rounded-full text-primary-text hover:bg-card"
         aria-label="Go to next month"
       >
         <ChevronRight className="size-7" />

@@ -26,7 +26,7 @@ function ScrollableChat({messages, isAiThinking}:ScrollableChatProps) {
 
 
   return (
-      <div className="text-container flex-1 overflow-y-auto">
+      <div className="text-container flex-1 overflow-y-auto custom-scroll">
             <div className="max-h-30">
               {messages.map((msg) => (
                 <div

@@ -22,11 +22,11 @@ function ToolsForMember({ member }: ToolsForMemberProps) {
       <div className="flex h-full min-h-0 flex-col gap-4">
         <div className="flex flex-wrap items-center gap-4">
           <div>
-            <h3 className="text-2xl font-medium tracking-tight text-white">
+            <h3 className="text-2xl font-medium tracking-tight">
               Tools for {member.name.split(" ")[0]}
             </h3>
           </div>
-          <p className="text-sm text-zinc-400">{member.role}</p>
+          <p className="text-sm ">{member.role}</p>
         </div>
 
         <div className="custom-scroll h-100 min-h-0 overflow-y-auto pr-2">
@@ -38,7 +38,7 @@ function ToolsForMember({ member }: ToolsForMemberProps) {
 
               return (
                 <article
-                  className="rounded-[24px] bg-[#2d2f38] px-5 py-5 text-white"
+                  className="rounded-lg bg-card px-5 py-5"
                   key={subscription.id}
                 >
                   <div className="flex items-start justify-between gap-4">
@@ -52,13 +52,13 @@ function ToolsForMember({ member }: ToolsForMemberProps) {
                           className="size-7 object-contain"
                         />
                       </div>
-                      <h4 className="text-xl font-medium tracking-tight text-white">
+                      <h4 className="text-xl font-medium tracking-tight">
                         {subscription.name}
                       </h4>
                     </div>
                     <button
                       type="button"
-                      className="flex size-10 items-center justify-center rounded-full text-zinc-200 transition hover:bg-white/10"
+                      className="flex size-10 items-center justify-center rounded-full text-primary-text transition hover:bg-white/10 cursor-not-allowed"
                       aria-label={`${subscription.name} actions`}
                     >
                       <Minus className="size-6" />
@@ -67,10 +67,10 @@ function ToolsForMember({ member }: ToolsForMemberProps) {
 
                   <div className="mt-8 grid grid-cols-[1fr_auto] gap-6">
                     <div className="self-end">
-                      <p className="mt-2 text-md text-zinc-400">
+                      <p className="mt-2 text-md ">
                         {subscription.plan}
                       </p>
-                      <p className="text-xl  text-white">
+                      <p className="text-xl  text-primary-text">
                         {assignedMembers.length}
                         {subscription.seats ? `/${subscription.seats}` : ""}
                       </p>
@@ -83,7 +83,7 @@ function ToolsForMember({ member }: ToolsForMemberProps) {
                         return (
                           <div
                             className={`rounded-full p-0.5 ${
-                              isSelected ? "bg-blue-500" : "bg-white"
+                              isSelected ? "bg-active" : "bg-border"
                             }`}
                             key={assignedMember.id}
                           >

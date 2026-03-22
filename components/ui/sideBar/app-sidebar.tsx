@@ -51,7 +51,7 @@ export function AppSidebar() {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild className="active:bg-transparent">
-                            <div className="text-gray-400 hover:text-white hover:bg-transparent"><Search /><span>Search</span></div>
+                            <div className="[&>span]:text-secondary-text hover:bg-transparent cursor-not-allowed"><Search className="text-secondary-text"/><span>Search</span></div>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>
@@ -71,8 +71,8 @@ export function AppSidebar() {
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                             {isChatRoute && (
-                                <div className="border-l border-white/20 ml-2 group-data-[collapsible=icon]:hidden">  
-                                <p className="pl-4 text-white/40 flex gap-2 items-center">History<History className="w-4"/></p>                                  
+                                <div className="border-l border-border ml-2 group-data-[collapsible=icon]:hidden">  
+                                <p className="pl-4 text-secondary-text flex gap-2 items-center">History<History className="w-4"/></p>                                  
                                 <div className="custom-scroll max-h-56 overflow-y-auto">
                                     {roomList.map((room) => (
                                             <SidebarMenuItem key={room.id}>
