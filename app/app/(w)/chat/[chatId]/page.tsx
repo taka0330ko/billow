@@ -61,7 +61,8 @@ function buildPromptWithSystem(messages: LocalChatMessage[]) {
 export default function ChatRoomPage() {
   const addMessage = useChatStore((state)=> state.addMessage);
   const [isAiThinking, setIsAiThinking] = useState(false);
-  const refFirstRef = useRef<boolean>(true);
+  const [isAiReady, setIsAiReady] = useState(false);
+  const hasRequestedInitialResponseRef = useRef(false);
 
   const params = useParams()
   const chatId = params.chatId as string
@@ -71,6 +72,7 @@ export default function ChatRoomPage() {
     const interval = window.setInterval(() => {
       const chatFn = window?.puter?.ai?.chat
       if (typeof chatFn !== "function") return
+      setIsAiReady(true)
       window.clearInterval(interval)
     }, 300)
 
@@ -115,17 +117,23 @@ const callAi = async (messages: LocalChatMessage[])=>{
     return extractAiText(res)
   }
 }
-//strict modeで2回レンダーされるのでuseRefでガード
-//useRef は 再レンダーしても値が保持される変数
-// NOTE:useRef 依存の設計なので改善すべき
 useEffect(()=>{
-  if (!room) return; 
-  if(room.messages.length > 1) return;
-   
-    if (refFirstRef.current) {
-      refFirstRef.current = false;
-      return;
-    }
+  if (!room) return;
+  if (!isAiReady) return;
+  if (room.messages.length > 1) return;
+  if (hasRequestedInitialResponseRef.current) return;
+
+  // strict modeで2回レンダーされるのでuseRefでガード
+  // useRef は 再レンダーしても値が保持される変数
+  // NOTE: この実装は dev の二重実行を前提にしており、
+  // 本番では初回AIレスポンスをスキップしてしまうので無効化している
+  //
+  // if (refFirstRef.current) {
+  //   refFirstRef.current = false;
+  //   return;
+  // }
+
+  hasRequestedInitialResponseRef.current = true;
   
 //最初のAIからのレスポンス。最初のチャットページのメッセージ（一番目）を取得
   const initialAiRes = async() =>{
@@ -142,7 +150,7 @@ useEffect(()=>{
       }
   }
   initialAiRes();
-  },[room, chatId, addMessage])
+  },[room, chatId, addMessage, isAiReady])
 
   if (!room) {
     return <div className="p-10 text-white">Room not found</div>
