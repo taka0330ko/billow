@@ -6,7 +6,7 @@ function Header() {
     return (
         <div>
             <header className="
-        h-16
+        h-16 bg-background
         border-b border-border
         flex items-center justify-between px-4
       ">
