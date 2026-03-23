@@ -11,7 +11,7 @@ export default function MemberPage() {
     const [selectedMember, setSelectedMember] = useState(members[0]);
 
     return (
-    <div  className="bg-workspace">
+    <div  className="min-h-full bg-workspace">
         <div>
             <MembersList
               selectedMemberId={selectedMember.id}
