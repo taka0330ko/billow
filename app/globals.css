@@ -64,7 +64,7 @@
 
   /* Surface colors */
   --color-background: var(--black);
-  --color-lp-background: var(--gray-50);
+  --color-lp-background: var(--white);
   --color-card: var(--gray-800-alpha-50);
   --color-quick-action: var(--gray-800);
 
@@ -146,4 +146,53 @@
   .custom-scroll::-webkit-scrollbar-thumb:hover {
     background: oklch(1 0 0 / 28%);
   }
+
+  /* LP CTA */
+  .orb {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  filter: blur(30px);
+  background: radial-gradient(
+    circle,
+    var(--blue-100) 0%,
+    var(--blue-600) 40%,
+    var(--blue-700) 75%
+  );
+  animation: floatOrb 8s ease-in-out infinite;
+}
+
+.orb-1 {
+  width: 120px;
+  height: 120px;
+  top: -30px;
+  left: -20px;
+}
+
+.orb-2 {
+  width: 100px;
+  height: 100px;
+  bottom: -30px;
+  right: -20px;
+  animation-delay: -4s;
+}
+
+@keyframes floatOrb {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(10px, -6px) scale(1.05);
+  }
+  50% {
+    transform: translate(0px, 10px) scale(0.95);
+  }
+  75% {
+    transform: translate(-8px, -4px) scale(1.03);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
 }
