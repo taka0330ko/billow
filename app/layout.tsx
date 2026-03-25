@@ -6,13 +6,13 @@ import "./globals.css";
 
 
 const manrope = Manrope({
-  variable: "--font-header",
+  variable: "--font-manrope",
   subsets: ["latin"],
   display: "swap",
 });
 
 const inter = Inter({
-  variable: "--font-body",
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap"
 });

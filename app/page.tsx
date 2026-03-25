@@ -40,13 +40,13 @@ export default function LpPage() {
           height={100}
         />
       </header>
-      <main className="mx-4">
+      <main className="mx-4 py-16">
         <div className="flex flex-col gap-8 lg:grid grid-cols-12 place-items-center">
           <div className="col-start-1 col-span-4 text-center">
-            <h1 className="text-lp-text text-4xl font-semi-bold">
+            <h1 className="text-lp-heading text-4xl font-semi-bold">
               Manage your team’s subscriptions in one place.
             </h1>
-            <p className="text-lg text-gray-500 mt-4">Manage your team subscriptions in one place. Track spending, organize plans, and make smarter business decisions with AI-powered insights.</p>
+            <p className="text-lg text-lp-body mt-4">Manage your team subscriptions in one place. Track spending, organize plans, and make smarter business decisions with AI-powered insights.</p>
           <div className="mt-4">
             <Link href="/app">
               <CTAButton>Open Dashboard</CTAButton>

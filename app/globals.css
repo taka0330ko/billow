@@ -31,13 +31,15 @@
   --gray-700: oklch(0.3074 0.0144 279.87);
   --gray-800: oklch(0.2587 0.0112 285.59);
   --gray-900: oklch(0.2064 0.0079 285.69);
-  --black: oklch(0.1681 0.0135 264.11);
+  --black: oklch(oklch(0.1681 0.0135 264.11));
 
   /* Neutral alpha variants */
   --gray-50-alpha-50: oklch(0.931 0 0 / 50%);
   --gray-100-alpha-50: oklch(0.8121 0.0055 286.28 / 50%);
   --gray-500-alpha-50: oklch(0.3978 0.0201 281.67 / 50%);
   --gray-800-alpha-50: oklch(0.2587 0.0112 285.59 / 50%);
+  --gray-800-alpha-80: oklch(0.2587 0.0112 285.59 / 80%);
+  --black-alpha-60: oklch(0.1681 0.0135 264.11 / 60%);
 
   /* Brand blue palette */
   --blue-100: oklch(0.8531 0.0721 270.97);
@@ -59,12 +61,17 @@
    * ======================================== */
 
   /* Typography aliases */
-  --font-sans: var(--font-body);
-  --font-mono: var(--font-header);
+  --font-heading: var(--font-manrope);
+  --font-body: var(--font-inter);
+
+  /* UI Color */
+  --color-calender-cell: var(--gray-800-alpha-80);
+  --color-calender-placeholder: var(--black-alpha-60);
+  --color-calender-active: var(--blue-600);
 
   /* Surface colors */
   --color-background: var(--black);
-  --color-lp-background: var(--white);
+  --color-lp-background: var(--gray-900);
   --color-card: var(--gray-800-alpha-50);
   --color-quick-action: var(--gray-800);
 
@@ -75,7 +82,8 @@
   /* Text colors */
   --color-primary-text: var(--gray-50);
   --color-secondary-text: var(--gray-300);
-  --color-lp-text: var(--black);
+  --color-lp-heading: var(--gray-50);
+  --color-lp-body: var(--gray-50);
 
   /* Form / border colors */
   --color-border: var(--gray-300);
@@ -102,13 +110,14 @@
   h4,
   h5,
   h6 {
-    @apply text-primary-text;
+    @apply text-primary-text font-heading;
   }
 
   /* Default body copy color */
   p,
-  span {
-    @apply text-secondary-text;
+  span,
+  a {
+    @apply text-secondary-text font-body;
   }
 }
 
