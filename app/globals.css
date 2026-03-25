@@ -68,12 +68,12 @@
   --color-calender-cell: var(--gray-800-alpha-80);
   --color-calender-placeholder: var(--black-alpha-60);
   --color-calender-active: var(--blue-600);
-
-  /* Surface colors */
-  --color-background: var(--black);
-  --color-lp-background: var(--gray-900);
   --color-card: var(--gray-800-alpha-50);
   --color-quick-action: var(--gray-800);
+
+  /* BG colors */
+  --color-background: var(--black);
+  --color-lp-background: var(--gray-900);
 
   /* Interactive / state colors */
   --color-active: var(--blue-500);

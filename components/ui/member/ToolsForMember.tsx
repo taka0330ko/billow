@@ -18,17 +18,7 @@ function ToolsForMember({ member }: ToolsForMemberProps) {
   );
 
   return (
-    <section className="h-full px-6 pb-8 pt-2">
-      <div className="flex h-full min-h-0 flex-col gap-4">
-        <div className="flex flex-wrap items-center gap-4">
-          <div>
-            <h3 className="text-2xl font-medium tracking-tight">
-              Tools for {member.name.split(" ")[0]}
-            </h3>
-          </div>
-          <p className="text-sm ">{member.role}</p>
-        </div>
-
+      <div >
         <div className="custom-scroll h-100 min-h-0 overflow-y-auto pr-2">
           <div className="flex flex-col gap-4">
             {memberSubscriptions.map((subscription) => {
@@ -106,7 +96,6 @@ function ToolsForMember({ member }: ToolsForMemberProps) {
           </div>
         </div>
       </div>
-    </section>
   );
 }
 
