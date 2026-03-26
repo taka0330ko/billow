@@ -31,9 +31,9 @@ function CalendarDayCell({
       onClick={onClick}
       disabled={isPlaceholder}
       className={cn(
-        "flex aspect-square min-h-16 w-full rounded-lg border border-border-mute p-2.5 text-left bg-calender-cell",
-        !isCurrentMonth && "bg-calender-placeholder",
-        isToday && "border-primary bg-calender-active text-primary-text",
+        "flex aspect-square min-h-16 w-full rounded-lg border border-border-mute p-2.5 text-left bg-calendar-cell",
+        !isCurrentMonth && "bg-calendar-placeholder",
+        isToday && "border-primary bg-calendar-active text-primary-text",
         isPlaceholder && "border-transparent",
         !isPlaceholder && "transition hover:border-border",
         isSelected && !isToday && "border-border",

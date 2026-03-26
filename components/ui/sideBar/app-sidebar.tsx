@@ -30,7 +30,7 @@ export function AppSidebar() {
 
     const pathname = usePathname()
     const isChatRoute = pathname === "/app/chat" || pathname.startsWith("/app/chat/")
-    
+
     //"rooms" is object
     //Object.values() > A function that retrieves “only the values” of an object as an array
 
@@ -39,19 +39,21 @@ export function AppSidebar() {
 
     const rooms = useChatStore((state) => state.rooms)
     const roomList = Object.values(rooms).sort((a, b) => b.createdAt - a.createdAt)
-    
-    
+
+
 
 
     return (
-    //Forcibly adjust the sidebar height slightly
+        //Forcibly adjust the sidebar height slightly
         <Sidebar
-            collapsible="icon">
+            collapsible="icon"
+            className="fixed top-16 h-[calc(100svh-64px)]"
+        >
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild className="active:bg-transparent">
-                            <div className="[&>span]:text-secondary-text hover:bg-transparent cursor-not-allowed"><Search className="text-secondary-text"/><span>Search</span></div>
+                            <div className="[&>span]:text-secondary-text hover:bg-transparent cursor-not-allowed"><Search className="text-secondary-text" /><span>Search</span></div>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>
@@ -62,19 +64,19 @@ export function AppSidebar() {
                     <SidebarGroupContent>
                         <SidebarMenu>
                             <SidebarMenuItem>
-                                <SidebarMenuButton 
-                                asChild 
-                                variant="billowSidebarBtn" 
-                                isActive={isChatRoute}
+                                <SidebarMenuButton
+                                    asChild
+                                    variant="billowSidebarBtn"
+                                    isActive={isChatRoute}
                                 >
                                     <Link href="/app/chat" ><MessageSquare /><span>Chat</span></Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
-                            {isChatRoute && (
-                                <div className="border-l border-border ml-2 group-data-[collapsible=icon]:hidden">  
-                                <p className="pl-4 text-secondary-text flex gap-2 items-center">History<History className="w-4"/></p>                                  
-                                <div className="custom-scroll max-h-56 overflow-y-auto">
-                                    {roomList.map((room) => (
+                            {(
+                                <div className="border-l border-border ml-2 group-data-[collapsible=icon]:hidden">
+                                    <p className="pl-4 text-secondary-text flex gap-2 items-center">History<History className="w-4" /></p>
+                                    <div className="custom-scroll max-h-56 overflow-y-auto">
+                                        {roomList.map((room) => (
                                             <SidebarMenuItem key={room.id}>
                                                 <SidebarMenuButton
                                                     asChild
@@ -91,7 +93,7 @@ export function AppSidebar() {
                                                 </SidebarMenuButton>
                                             </SidebarMenuItem>
                                         ))}
-                                </div>
+                                    </div>
                                 </div>
                             )}
 
@@ -106,8 +108,8 @@ export function AppSidebar() {
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                             <SidebarMenuItem>
-                                <SidebarMenuButton asChild variant="billowSidebarBtn" isActive={pathname === "/app/settings"}>
-                                    <Link href="/app/settings"><Settings /><span>Setting</span></Link>
+                                <SidebarMenuButton className="cursor-not-allowed" asChild variant="billowSidebarBtn" isActive={pathname === "/app/settings"}>
+                                    <Link href="/app/#"><Settings /><span>Setting</span></Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                         </SidebarMenu>
@@ -118,9 +120,10 @@ export function AppSidebar() {
             <SidebarFooter>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton asChild className="w-auto 
-    active:bg-transparent
-">
+                        <SidebarMenuButton 
+                        asChild 
+                        className="w-auto 
+                        active:bg-transparent">
                             <Link href="/" className="text-gray-400 hover:text-white hover:bg-transparent"><Undo2 /><span>Back to Home</span></Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>

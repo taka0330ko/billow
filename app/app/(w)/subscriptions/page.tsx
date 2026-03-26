@@ -1,6 +1,6 @@
 "use client"
 
-import CalenderHeader from "@/components/ui/subscriptions/CalenderHeader"
+import CalendarHeader from "@/components/ui/subscriptions/CalendarHeader"
 import CalendarGrid from "@/components/ui/subscriptions/CalendarGrid"
 import CalendarWeekdays from "@/components/ui/subscriptions/CalendarWeekdays"
 import ToolsCards from "@/components/ui/member/ToolsCards";
@@ -25,7 +25,7 @@ export default function SubscriptionsPage() {
     <section className="min-h-full bg-workspace px-6 py-8">
       <div className="flex flex-col lg:grid lg:grid-cols-5 gap-4">
         <div className="flex w-full max-w-xl flex-col gap-4 mx-auto cols-start-1 col-span-3">
-          <CalenderHeader
+          <CalendarHeader
             currentDate={currentDate}
             onPrevMonth={() => setCurrentDate(getPreviousMonth(currentDate))}
             onNextMonth={() => setCurrentDate(getNextMonth(currentDate))}

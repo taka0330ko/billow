@@ -31,7 +31,7 @@
   --gray-700: oklch(0.3074 0.0144 279.87);
   --gray-800: oklch(0.2587 0.0112 285.59);
   --gray-900: oklch(0.2064 0.0079 285.69);
-  --black: oklch(oklch(0.1681 0.0135 264.11));
+  --black: oklch(0.1681 0.0135 264.11);
 
   /* Neutral alpha variants */
   --gray-50-alpha-50: oklch(0.931 0 0 / 50%);
@@ -65,9 +65,9 @@
   --font-body: var(--font-inter);
 
   /* UI Color */
-  --color-calender-cell: var(--gray-800-alpha-80);
-  --color-calender-placeholder: var(--black-alpha-60);
-  --color-calender-active: var(--blue-600);
+  --color-calendar-cell: var(--gray-800-alpha-80);
+  --color-calendar-placeholder: var(--black-alpha-60);
+  --color-calendar-active: var(--blue-600);
   --color-card: var(--gray-800-alpha-50);
   --color-quick-action: var(--gray-800);
 

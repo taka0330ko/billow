@@ -9,7 +9,7 @@ export default function WorkSpaceLayout({ children }: { children: React.ReactNod
     return (
         <SidebarProvider>
             <div className="grid min-h-svh grid-rows-[64px_1fr] overflow-hidden  w-full">
-                <Header />
+                <Header className="fixed w-full z-5"/>
                 <div className="flex min-h-0">
                     <AppSidebar />
 
@@ -17,7 +17,7 @@ export default function WorkSpaceLayout({ children }: { children: React.ReactNod
                             flex flex-col min-h-0
                             ">
                         <div className="relative flex-1 overflow-auto">
-                            <SidebarTrigger/>
+                            <SidebarTrigger className="cursor-pointer hover:bg-active fixed"/>
                             {children}
                         </div>
                     </SidebarInset>

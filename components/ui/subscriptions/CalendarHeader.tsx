@@ -5,7 +5,7 @@ import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/globalUI/button"
 import { cn } from "@/lib/utils"
 
-type CalenderHeaderProps = {
+type CalendarHeaderProps = {
   currentDate: Date
   onPrevMonth: () => void
   onNextMonth: () => void
@@ -14,12 +14,12 @@ type CalenderHeaderProps = {
 
 const monthFormatter = new Intl.DateTimeFormat("en-US", { month: "long" })
 
-function CalenderHeader({
+function CalendarHeader({
   currentDate,
   onPrevMonth,
   onNextMonth,
   className,
-}: CalenderHeaderProps) {
+}: CalendarHeaderProps) {
   const monthLabel = monthFormatter.format(currentDate)
   const yearLabel = currentDate.getFullYear()
 
@@ -73,4 +73,4 @@ function CalenderHeader({
   )
 }
 
-export default CalenderHeader
+export default CalendarHeader
