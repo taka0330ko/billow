@@ -1,28 +1,80 @@
 import { systemPrompt } from "@/lib/ai/systemPrompt"
 import { databaseContext } from "@/lib/ai/databaseContext"
 
-//何が返ってきても、とにかく最終的に string にして返す安全フィルター
-function extractAiText(res: unknown): string {
-  if (typeof res === "string") return res
+// AIによるバグ修正コード  ////////////////////////////////////////////////
 
-  if (
-    typeof res === "object" &&
-    res !== null &&
-    "message" in res
-  ) {
-    const message = (res as { message?: unknown }).message
+// 複数の応答形式に対応した安全なテキスト抽出フィルター
+function extractAiText(response: unknown): string {
+  // 直接文字列の場合
+  if (typeof response === "string") {
+    return response
+  }
 
-    if (
-      typeof message === "object" &&
-      message !== null &&
-      "content" in message
-    ) {
-      const content = (message as { content?: unknown }).content
-      if (typeof content === "string") {
-        return content
+  if (!response || typeof response !== "object") {
+    return ""
+  }
+
+  const data = response as Record<string, unknown>
+
+  // Puter.jsエラー形式のチェック
+  if ("code" in data && "error" in data) {
+    const error = data.error
+    throw new Error(`AI Error: ${String(error)}`)
+  }
+
+  // message プロパティの確認
+  const message = data.message
+  if (message && typeof message === "object") {
+    const msgData = message as Record<string, unknown>
+
+    // message.content (文字列配列の場合もある)
+    if (typeof msgData.content === "string") {
+      return msgData.content
+    }
+
+    // message.content (配列の場合)
+    if (Array.isArray(msgData.content)) {
+      const contentStr = msgData.content
+        .map((part) => {
+          if (!part || typeof part !== "object") return ""
+          const p = part as Record<string, unknown>
+          return typeof p.text === "string"
+            ? p.text
+            : typeof p.content === "string"
+              ? p.content
+              : ""
+        })
+        .filter(Boolean)
+        .join("\n")
+      if (contentStr) {
+        return contentStr
       }
     }
+
+    // message.text
+    if (typeof msgData.text === "string") {
+      return msgData.text
+    }
   }
+
+  // 直接的なプロパティのチェック
+  if (typeof data.text === "string") {
+    return data.text
+  }
+
+  if (typeof data.content === "string") {
+    return data.content
+  }
+
+  if (typeof data.result === "string") {
+    return data.result
+  }
+
+  // reply プロパティ
+  if (typeof data.reply === "string") {
+    return data.reply
+  }
+  /////////////////////////////////////////////////////////////
 
   return ""
 }

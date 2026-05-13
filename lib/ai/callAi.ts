@@ -1,25 +1,33 @@
 import { LocalChatMessage } from "@/lib/ai/types"
 import { extractAiText, withSystemPrompt, buildPromptWithSystem} from "@/lib/ai/chatHelpers"
 
-export const callAi = async (messages: LocalChatMessage[])=>{
-  const chatUnknown: unknown = window?.puter?.ai?.chat
-  if(typeof chatUnknown !== "function") return ""
+type PuterChat = (...args: unknown[]) => Promise<unknown>
 
-  const chat = chatUnknown as (
-    input: 
-    | string
-    | {
-      messages: {role: "user" | "assistant" | "system";  content: string}[]
-      model?: string
-    }
-  ) => Promise<unknown>
+export const callAi = async (messages: LocalChatMessage[]): Promise<string> => {
+  const chat = window?.puter?.ai?.chat as PuterChat | undefined
+
+  if (typeof chat !== "function") {
+    return ""
+  }
+
+  const formattedMessages = withSystemPrompt(messages)
 
   try {
-    const res = await chat({messages: withSystemPrompt(messages)})
-    return extractAiText(res)
+    const res = await chat(formattedMessages)
+    const aiText = extractAiText(res)
+    if (aiText) return aiText
   } catch {
+    // fallback to string format
+  }
+
+  try {
     const prompt = buildPromptWithSystem(messages)
     const res = await chat(prompt)
-    return extractAiText(res)
+    const aiText = extractAiText(res)
+    if (aiText) return aiText
+  } catch {
+    // both formats failed
   }
+
+  return ""
 }

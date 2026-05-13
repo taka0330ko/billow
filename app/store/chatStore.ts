@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { v4 as uuidv4 } from "uuid";
 
 type Message = {
     id: string
@@ -42,7 +43,7 @@ export const useChatStore = create<ChatStore>()(
             rooms: {},
  
             createRoom: (initialMessage: string) =>{
-                const id = crypto.randomUUID();
+                const id =  uuidv4();
 
                 const newRoom: Room = {
                     id,
@@ -50,7 +51,7 @@ export const useChatStore = create<ChatStore>()(
                     createdAt: Date.now(),
                     messages:[
                         {
-                          id: crypto.randomUUID(),
+                          id: uuidv4(),
                           role: "user",
                           content: initialMessage,
                           createdAt: Date.now(),
@@ -71,7 +72,7 @@ export const useChatStore = create<ChatStore>()(
                 if(!room) return
 
                 const newMessage: Message ={
-                             id: crypto.randomUUID(),
+                             id:  uuidv4(),
           role,
           content,
           createdAt: Date.now(),

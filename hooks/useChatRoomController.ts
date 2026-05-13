@@ -13,7 +13,7 @@ type Props = {
     } | undefined
 }
 
-export function useChatRoomController({chatId, room}:Props) {
+export function useChatRoomController({ chatId, room }: Props) {
     const addMessage = useChatStore((state) => state.addMessage)
 
     const [isAiThinking, setIsAiThinking] = useState(false);
@@ -22,29 +22,38 @@ export function useChatRoomController({chatId, room}:Props) {
     const hasRequestedInitialResponseRef = useRef(false);
 
     //Check AI Ready
-    useEffect(()=> {
-        const interval = window.setInterval(()=>{
+    useEffect(() => {
+        const interval = window.setInterval(() => {
             const chatFn = window?.puter?.ai?.chat
             if (typeof chatFn !== "function") return
             setIsAiReady(true)
             window.clearInterval(interval)
         }, 300)
-        return () => window.clearInterval(interval)
+
+        // Add timeout to prevent infinite checking
+        const timeout = window.setTimeout(() => {
+            window.clearInterval(interval)
+        }, 10000)
+
+        return () => {
+            window.clearInterval(interval)
+            window.clearTimeout(timeout)
+        }
     }, [])
 
-    useEffect(()=> {
-        if(!room) return
-        if(!isAiReady) return
-        if(room.messages.length > 1) return
+    useEffect(() => {
+        if (!room) return
+        if (!isAiReady) return
+        if (room.messages.length > 1) return
         if (hasRequestedInitialResponseRef.current === true) return;
 
         hasRequestedInitialResponseRef.current = true
 
         const initialAiRes = async () => {
             setIsAiThinking(true)
-            try{
+            try {
                 const aiText = await callAi(room.messages)
-                if(aiText) {
+                if (aiText) {
                     addMessage(chatId, "assistant", aiText)
                 }
             } catch (error) {
@@ -57,35 +66,35 @@ export function useChatRoomController({chatId, room}:Props) {
     }, [room, chatId, addMessage, isAiReady])
 
     // Submit handler
-  const handleSubmit = async (message: string) => {
-    if (!room) return
+    const handleSubmit = async (message: string) => {
+        if (!room) return
 
-    addMessage(chatId, "user", message)
+        addMessage(chatId, "user", message)
 
-    const historyWithNewMessage: LocalChatMessage[] = [
-      ...room.messages.map((m) => ({
-        role: m.role,
-        content: m.content,
-      })),
-      { role: "user", content: message },
-    ]
+        const historyWithNewMessage: LocalChatMessage[] = [
+            ...room.messages.map((m) => ({
+                role: m.role,
+                content: m.content,
+            })),
+            { role: "user", content: message },
+        ]
 
-    setIsAiThinking(true)
+        setIsAiThinking(true)
 
-    try {
-      const aiText = await callAi(historyWithNewMessage)
-      if (aiText) {
-        addMessage(chatId, "assistant", aiText)
-      }
-    } catch (error) {
-      console.error("[puter] chat failed", error)
-    } finally {
-      setIsAiThinking(false)
+        try {
+            const aiText = await callAi(historyWithNewMessage)
+            if (aiText) {
+                addMessage(chatId, "assistant", aiText)
+            }
+        } catch (error) {
+            console.error("[puter] chat failed", error)
+        } finally {
+            setIsAiThinking(false)
+        }
     }
-  }
 
-  return {
-    isAiThinking,
-    handleSubmit,
-  }
+    return {
+        isAiThinking,
+        handleSubmit,
+    }
 }
