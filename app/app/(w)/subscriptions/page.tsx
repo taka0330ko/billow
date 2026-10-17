@@ -1,5 +1,6 @@
 "use client"
 
+import SubscriptionTotalCard from "@/components/ui/subscriptions/SubscriptionTotalCard"
 import CalendarHeader from "@/components/ui/subscriptions/CalendarHeader"
 import CalendarGrid from "@/components/ui/subscriptions/CalendarGrid"
 import CalendarWeekdays from "@/components/ui/subscriptions/CalendarWeekdays"
@@ -39,7 +40,8 @@ export default function SubscriptionsPage() {
             onSelectSubscriptions={setSelectedSubscriptions}
           />
         </div>
-        <div className="lg:col-start-4 lg:col-span-2">
+        <div className="flex min-w-0 flex-col gap-4 lg:col-start-4 lg:col-span-2">
+          <SubscriptionTotalCard items={subscriptions} />
           <ToolsCards items={selectedSubscriptions} />
         </div>
       </div>

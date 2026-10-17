@@ -44,7 +44,8 @@ function CalendarHeader({
       <div className="flex items-center gap-5">
         <button
           type="button"
-          className="flex items-center gap-2 text-3xl font-medium tracking-tight text-secondary-text"
+          aria-disabled="true"
+          className="flex cursor-not-allowed items-center gap-2 text-3xl font-medium tracking-tight text-secondary-text"
         >
           <span className="text-primary-text">{monthLabel}</span>
           <ChevronDown className="size-6 cursor-not-allowed" />
@@ -52,7 +53,8 @@ function CalendarHeader({
 
         <button
           type="button"
-          className="flex items-center gap-2 text-3xl font-medium tracking-tight text-secondary-text"
+          aria-disabled="true"
+          className="flex cursor-not-allowed items-center gap-2 text-3xl font-medium tracking-tight text-secondary-text"
         >
           <span className="text-primary-text">{yearLabel}</span>
           <ChevronDown className="size-6 cursor-not-allowed" />

@@ -92,6 +92,11 @@
 }
 
 @layer base {
+  /* Shared affordance for actionable controls; component utilities can override it. */
+  :where(button, [role="button"], a[href], summary, select, input[type="checkbox"], input[type="radio"]):not(:disabled):not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
   /* Global border and focus-ring defaults */
   * {
     @apply border-border outline-ring/50;

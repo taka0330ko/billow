@@ -1,64 +1,44 @@
 import Image from "next/image";
 import Link from "next/link";
-import Carousel from "@/components/ui/lpPage/Carousel";
-import CTAButton from "@/components/ui/lpPage/CTAButton";
-
-const CarouselItem = [
-  {
-    id: 1,
-    title:"Chat Page",
-    image:"/images/chat-page.png"
-  },
-  {
-    id: 2,
-    title:"Chat Room Page",
-    image:"/images/chat-room-page.png"
-  },
-  {
-    id: 3,
-    title:"Subscription Page",
-    image:"/images/subscription-page.png"
-  },
-  {
-    id: 4,
-    title:"Members Page",
-    image:"/images/member-page.png"
-  }
-
-]
-
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import styles from "./landing.module.css";
 
 export default function LpPage() {
   return (
-
-    <div>
-      <header className="px-8 py-4 absolute top-0">
-        <Image
-          src={"/images/Billow.svg"}
-          alt="Billow logo"
-          width={90}
-          height={100}
-        />
+    <div className={styles.page}>
+      <header className={styles.header}>
+        <Image src="/images/Billow.svg" alt="Billow" width={100} height={30} priority />
+        <a href="https://puter.com/" target="_blank" rel="noopener noreferrer">About Puter <ArrowUpRight size={14} aria-hidden="true" /></a>
       </header>
-      <main className="mx-4 py-16">
-        <div className="flex flex-col gap-8 lg:grid grid-cols-12 place-items-center">
-          <div className="col-start-1 col-span-4 text-center">
-            <h1 className="text-lp-heading text-4xl font-semi-bold">
-              Manage your team’s subscriptions in one place.
-            </h1>
-            <p className="text-lg text-lp-body mt-4">Manage your team subscriptions in one place. Track spending, organize plans, and make smarter business decisions with AI-powered insights.</p>
-          <div className="mt-4">
-            <Link href="/app">
-              <CTAButton>Open Dashboard</CTAButton>
-            </Link>
+      <main className={styles.main}>
+        <section className={styles.intro} aria-labelledby="welcome-title">
+          <h1 id="welcome-title">Welcome to Billow</h1>
+          <p>Manage your team’s subscriptions, members, and spending in one workspace.</p>
+          <Link href="/app" className={styles.openButton}>Open workspace <ArrowRight size={17} aria-hidden="true" /></Link>
+        </section>
+        <section className={styles.guide} aria-labelledby="puter-title">
+          <div className={styles.guideCopy}>
+            <h2 id="puter-title">Using AI for the first time</h2>
+            <p>Billow’s AI chat uses Puter, a service that connects apps to AI through your Puter account.</p>
+            <p>When you use an AI feature for the first time, a separate Puter sign-in window opens, as shown here.</p>
+            <ol>
+              <li>Open the workspace and start a chat or select a quick action.</li>
+              <li>Sign in to Puter or create an account in the new window.</li>
+              <li>Return to Billow to continue.</li>
+            </ol>
+            <p className={styles.note}>If the window doesn’t appear, check your browser’s pop-up settings and try again. You may need to sign in again when your session expires.</p>
+            <div className={styles.links}>
+              <a href="https://puter.com/" target="_blank" rel="noopener noreferrer">Puter <ArrowUpRight size={13} aria-hidden="true" /></a>
+              <a href="https://docs.puter.com/" target="_blank" rel="noopener noreferrer">Documentation <ArrowUpRight size={13} aria-hidden="true" /></a>
+            </div>
           </div>
-          </div>
-          <div className="col-start-5 col-span-8">
-            <Carousel items={CarouselItem}/>
-          </div>
-        </div>
-      </main >
-    </div >
-
+          <figure className={styles.figure}>
+            <Image src="/images/puter-sign-in.jpg" alt="Puter sign-in window displayed over the Billow workspace" width={1509} height={828} sizes="(max-width: 800px) 100vw, 50vw" />
+            <figcaption>Example of the Puter sign-in window.</figcaption>
+          </figure>
+        </section>
+      </main>
+      <footer className={styles.footer}><p>Created by Taka Kondo and Sangwha Cha</p><p>AI powered by <a href="https://puter.com/" target="_blank" rel="noopener noreferrer">Puter</a></p></footer>
+    </div>
   );
 }
